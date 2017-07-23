@@ -26,6 +26,7 @@ namespace PDMTools
         private TemplateRootModel mTemplateRootM = null;
         private FirmwareModel mFirmwareM = null;
         private ToolModel mToolM = null;
+        private ActionBarModel mActionBarM = null;
 
         private Defined.UiState mUiState = Defined.UiState.Idle;
 
@@ -34,7 +35,8 @@ namespace PDMTools
             InitializeComponent();
 
             // 版本号, [大版本].[小版本].[与2000/1/1的差值天数].[当天时间刻度]
-            this.VersionLabel.Content = App.ResourceAssembly.GetName(false).Version;
+            this.VersionLabel.Content = (string)FindResource("version") + ": "
+                + App.ResourceAssembly.GetName(false).Version;
 
             initModels();
         }
@@ -73,10 +75,22 @@ namespace PDMTools
                 mToolM = new ToolModel();
                 mToolM.init(this);
             }
+
+            if (null == mActionBarM)
+            {
+                mActionBarM = new ActionBarModel();
+                mActionBarM.init(this);
+            }
         }
 
         private void deinitModels()
         {
+            if (null != mActionBarM)
+            {
+                mActionBarM.deinit();
+                mActionBarM = null;
+            }
+
             if (null != mToolM)
             {
                 mToolM.deinit();
@@ -155,6 +169,7 @@ namespace PDMTools
             mFirmwareM.showState(state);
             mToolM.showState(state);
             mLogM.showState(state);
+            mActionBarM.showState(state);
         }
 
         /*
@@ -288,6 +303,23 @@ namespace PDMTools
                 showTipMessage((string)FindResource("selected_file_is_invalid"));
                 return;
             }
+        }
+
+        private void RunBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void ResetBtn_Click(object sender, RoutedEventArgs e)
+        {
+            mUiState = Defined.UiState.Idle;
+            showCurState(mUiState);
+        }
+
+        private void ClearBtn_Click(object sender, RoutedEventArgs e)
+        {
+            mLogM.clear();
+            showCurState(mUiState);
         }
 
         

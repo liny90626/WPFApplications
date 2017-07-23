@@ -4,6 +4,9 @@
     <!-- B -->
     <sys:String x:Key="browser">浏览</sys:String>
 
+    <!-- C -->
+    <sys:String x:Key="clear_log">清空日志</sys:String>
+    
     <!-- F -->
     <sys:String x:Key="filter_img_file">固件烧写文件(*.img)|*.img</sys:String>
     <sys:String x:Key="filter_tool_file">生产工具文件(*.zip)|*.zip|生产工具文件(*.rar)|*.rar</sys:String>
@@ -18,11 +21,16 @@
     <sys:String x:Key="publish_firmware">发布固件</sys:String>
     <sys:String x:Key="publish_tool">发布工具</sys:String>
 
+    <!-- R -->
+    <sys:String x:Key="reset">重置</sys:String>
+    
     <!-- S -->
     <sys:String x:Key="selected_file_can_not_be_empty">所选文件不可为空!</sys:String>
     <sys:String x:Key="selected_file_is_invalid">所选文件非法!</sys:String>
     <sys:String x:Key="selected_path_can_not_be_empty">所选路径不可为空!</sys:String>
     <sys:String x:Key="selected_path_is_invalid">所选路径非法!</sys:String>
+    <sys:String x:Key="start">开始</sys:String>
+    <sys:String x:Key="stop">停止</sys:String>
 
     <!-- T -->
     <sys:String x:Key="tips">提示</sys:String>

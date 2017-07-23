@@ -9,22 +9,28 @@ using PDMTools.defined;
 namespace PDMTools.models
 {
     /*
-     * 管理日志数据及对应UI显示
+     * 管理动作按钮及对应UI显示
      */
-    public class LogModel : BaseModel
+    public class ActionBarModel : BaseModel
     {
-        private TextBox mLogTextBox = null;
+        private Button mRunBtn = null;
+        private Button mResetBtn = null;
+        private Button mClearBtn = null;
 
         public override void init(MainWindow win)
         {
             base.init(win);
-            mLogTextBox = win.LogTxt;
+            mRunBtn = win.RunBtn;
+            mResetBtn = win.ResetBtn;
+            mClearBtn = win.ClearBtn;
             showState(Defined.UiState.Idle);
         }
 
         public override void deinit()
         {
-            mLogTextBox = null;
+            mClearBtn = null;
+            mResetBtn = null;
+            mRunBtn = null;
             base.deinit();
         }
 
@@ -40,19 +46,34 @@ namespace PDMTools.models
                 case Defined.UiState.SelectedFirmware:
                 case Defined.UiState.SelectedTemplate:
                 case Defined.UiState.SelectedTool:
-                case Defined.UiState.SelectedFirmwareAndTool:
+                case Defined.UiState.SelectedFirmwareAndTool: 
+                    {
+                        mRunBtn.IsEnabled = true;
+                        mRunBtn.Content = (string)mWin.FindResource("start");
+
+                        mResetBtn.IsEnabled = true;
+                        mClearBtn.IsEnabled = true;
+                    }
+                    break;
+
                 case Defined.UiState.Doing:
                     {
-                        mLogTextBox.IsEnabled = true;
-                        mLogTextBox.IsReadOnly = true;
+                        mRunBtn.IsEnabled = true;
+                        mRunBtn.Content = (string)mWin.FindResource("stop");
+
+                        mResetBtn.IsEnabled = false;
+                        mClearBtn.IsEnabled = false;
                     }
                     break;
 
                 case Defined.UiState.Idle:
                 default:
                     {
-                        mLogTextBox.IsEnabled = false;
-                        mLogTextBox.IsReadOnly = true;
+                        mRunBtn.IsEnabled = false;
+                        mRunBtn.Content = (string)mWin.FindResource("start");
+
+                        mResetBtn.IsEnabled = false;
+                        mClearBtn.IsEnabled = false;
                     }
                     break;
             }
@@ -66,24 +87,6 @@ namespace PDMTools.models
             }
 
             return true;
-        }
-
-        public void print(string line)
-        {
-            if (!isInited())
-            {
-                return;
-            }
-        }
-
-        public void clear()
-        {
-            if (!isInited())
-            {
-                return;
-            }
-
-            mLogTextBox.Text = "";
         }
     }
 }

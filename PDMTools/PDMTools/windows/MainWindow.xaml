@@ -23,7 +23,17 @@
                 <Button Content="{StaticResource browser}" Height="Auto" Name="SelectToolFileBtn" Width="100" Margin="10,0" Style="{StaticResource MyWpfButton}" IsEnabled="False" Focusable="False" Click="SelectToolFileBtn_Click" />
             </StackPanel>
             <TextBox Width="550" Height="120" Margin="10,10,10,0" Name="LogTxt" IsEnabled="True" IsReadOnly="True" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" />
-            <Label Height="Auto" Width="Auto" Margin="10,10,10,0" Name="VersionLabel" Content="{StaticResource version_is_unknown}" HorizontalAlignment="Right" />
+            <StackPanel Height="Auto" Margin="10,10,10,0" Width="550" Orientation="Horizontal">
+                <StackPanel Height="Auto" Width="400" Orientation="Horizontal">
+                    <Button Content="{StaticResource start}" Height="Auto" Name="RunBtn" Width="100" Margin="10,0" Style="{StaticResource MyWpfButton}" IsEnabled="False" Focusable="False" Click="RunBtn_Click" />
+                    <Button Content="{StaticResource reset}" Height="Auto" Name="ResetBtn" Width="100" Margin="10,0" Style="{StaticResource MyWpfButton}" IsEnabled="False" Focusable="False" Click="ResetBtn_Click" />
+                    <Button Content="{StaticResource clear_log}" Height="Auto" Name="ClearBtn" Width="100" Margin="10,0" Style="{StaticResource MyWpfButton}" IsEnabled="False" Focusable="False" Click="ClearBtn_Click" />
+                </StackPanel>
+                <StackPanel Height="Auto" Width="150" Orientation="Horizontal" HorizontalAlignment="Right">
+                    <Label Height="Auto" Width="150" Name="VersionLabel" Content="{StaticResource version_is_unknown}"  HorizontalContentAlignment="Right" FontWeight="Bold" />
+                </StackPanel>
+            </StackPanel>
+            
         </StackPanel>
     </Grid>
 </Window>

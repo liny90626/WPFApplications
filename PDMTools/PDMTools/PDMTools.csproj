@@ -73,6 +73,7 @@
     <Compile Include="models\LogModel.cs" />
     <Compile Include="models\FirmwareModel.cs" />
     <Compile Include="models\ToolModel.cs" />
+    <Compile Include="models\ActionBarModel.cs" />
     <Compile Include="windows\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
