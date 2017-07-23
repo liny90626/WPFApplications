@@ -1,0 +1,36 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+    <!-- B -->
+    <sys:String x:Key="browser">浏览</sys:String>
+
+    <!-- F -->
+    <sys:String x:Key="filter_img_file">固件烧写文件(*.img)|*.img</sys:String>
+    <sys:String x:Key="filter_tool_file">生产工具文件(*.zip)|*.zip|生产工具文件(*.rar)|*.rar</sys:String>
+    <sys:String x:Key="filter_zip_file">固件升级文件(*.zip)|*.zip</sys:String>
+    
+    <!-- P -->
+    <sys:String x:Key="pdm_tools">PDM工具</sys:String>
+    <sys:String x:Key="please_select_template_root">请选择要使用的模板根目录...</sys:String>
+    <sys:String x:Key="please_select_tool_file">请选择要发布的生产工具压缩文件...</sys:String>
+    <sys:String x:Key="please_select_img_file">请选择要发布的固件烧写IMG文件...</sys:String>
+    <sys:String x:Key="please_select_zip_file">请选择要发布的固件升级ZIP文件...</sys:String>
+    <sys:String x:Key="publish_firmware">发布固件</sys:String>
+    <sys:String x:Key="publish_tool">发布工具</sys:String>
+
+    <!-- S -->
+    <sys:String x:Key="selected_file_can_not_be_empty">所选文件不可为空!</sys:String>
+    <sys:String x:Key="selected_file_is_invalid">所选文件非法!</sys:String>
+    <sys:String x:Key="selected_path_can_not_be_empty">所选路径不可为空!</sys:String>
+    <sys:String x:Key="selected_path_is_invalid">所选路径非法!</sys:String>
+
+    <!-- T -->
+    <sys:String x:Key="tips">提示</sys:String>
+
+    <!-- V -->
+    <sys:String x:Key="version">版本号</sys:String>
+    <sys:String x:Key="version_is_unknown">版本号未知</sys:String>
+
+    <!-- W -->
+    <sys:String x:Key="warning">警告</sys:String>
+</ResourceDictionary>

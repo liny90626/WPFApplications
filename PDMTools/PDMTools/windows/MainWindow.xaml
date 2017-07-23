@@ -1,0 +1,29 @@
+﻿<Window x:Class="PDMTools.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="{StaticResource pdm_tools}" Height="400" Width="600" ResizeMode="NoResize">
+    <Grid>
+        <StackPanel Width="Auto" Height="Auto">
+            <StackPanel Height="Auto" Margin="10,10,10,10" Width="550" Orientation="Horizontal">
+                <Label Content="{StaticResource please_select_template_root}" Height="Auto" Name="SelectTemplateRootLabel" Width="400" Padding="5" />
+                <Button Content="{StaticResource browser}" Height="Auto" Name="SelectTemplateRootBtn" Width="100" Margin="10,0" Style="{StaticResource MyWpfButton}" IsEnabled="False" Click="SelectTemplateRootBtn_Click" />
+            </StackPanel>
+            <CheckBox Content="{StaticResource publish_firmware}" Height="Auto" Width="550" Margin="10,10,10,0" Name="PublishFirmware" Checked="PublishFirmware_OnCheck" Unchecked="PublishFirmware_OnCheck"/>
+            <StackPanel Height="Auto" Margin="10,10,10,0" Width="550" Orientation="Horizontal">
+                <Label Content="{StaticResource please_select_img_file}" Height="Auto" Name="SelectImgFileLabel" Width="400" Padding="5" />
+                <Button Content="{StaticResource browser}" Height="Auto" Name="SelectImgFileBtn" Width="100" Margin="10,0" Style="{StaticResource MyWpfButton}" IsEnabled="False" Click="SelectImgFileBtn_Click" />
+            </StackPanel>
+            <StackPanel Height="Auto" Margin="10,10,10,0" Width="550" Orientation="Horizontal">
+                <Label Content="{StaticResource please_select_zip_file}" Height="Auto" Name="SelectZipFileLabel" Width="400" Padding="5" />
+                <Button Content="{StaticResource browser}" Height="Auto" Name="SelectZipFileBtn" Width="100" Margin="10,0" Style="{StaticResource MyWpfButton}" IsEnabled="False" Click="SelectZipFileBtn_Click" />
+            </StackPanel>
+            <CheckBox Content="{StaticResource publish_tool}" Height="Auto" Width="550" Margin="10,10,10,0" Name="PublishTool" Checked="PublishTool_OnCheck" Unchecked="PublishTool_OnCheck"/>
+            <StackPanel Height="Auto" Margin="10,10,10,0" Width="550" Orientation="Horizontal">
+                <Label Content="{StaticResource please_select_tool_file}" Height="Auto" Name="SelectToolFileLabel" Width="400" Padding="5" />
+                <Button Content="{StaticResource browser}" Height="Auto" Name="SelectToolFileBtn" Width="100" Margin="10,0" Style="{StaticResource MyWpfButton}" IsEnabled="False" Focusable="False" Click="SelectToolFileBtn_Click" />
+            </StackPanel>
+            <TextBox Width="550" Height="120" Margin="10,10,10,0" Name="LogTxt" IsEnabled="True" IsReadOnly="True" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" />
+            <Label Height="Auto" Width="Auto" Margin="10,10,10,0" Name="VersionLabel" Content="{StaticResource version_is_unknown}" HorizontalAlignment="Right" />
+        </StackPanel>
+    </Grid>
+</Window>
