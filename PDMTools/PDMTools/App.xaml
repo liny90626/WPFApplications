@@ -6,7 +6,7 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="language/zh-CN.xaml"/>
-                <ResourceDictionary Source="styles/Button.xaml"/>
+                <ResourceDictionary Source="styles/Metro.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>
