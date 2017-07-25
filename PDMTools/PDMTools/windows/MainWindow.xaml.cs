@@ -12,9 +12,13 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Forms;
+using System.Threading.Tasks;
 using MahApps.Metro.Controls;
+using MahApps.Metro.Controls.Dialogs;
+using PDMTools.controls;
 using PDMTools.models;
 using PDMTools.defined;
+using PDMTools.datas;
 
 namespace PDMTools
 {
@@ -23,6 +27,8 @@ namespace PDMTools
     /// </summary>
     public partial class MainWindow : MetroWindow
     {
+        private MainControl mMainC = null;
+
         private LogModel mLogM = null;
         private TemplateRootModel mTemplateRootM = null;
         private FirmwareModel mFirmwareM = null;
@@ -30,6 +36,7 @@ namespace PDMTools
         private ActionBarModel mActionBarM = null;
 
         private Defined.UiState mUiState = Defined.UiState.Idle;
+        private Defined.UiState mLastUiState = Defined.UiState.Idle;
 
         public MainWindow()
         {
@@ -39,17 +46,36 @@ namespace PDMTools
             this.VersionLabel.Content = (string)FindResource("version") + ": "
                 + App.ResourceAssembly.GetName(false).Version;
 
+            initControls();
             initModels();
         }
 
         ~MainWindow()
         {
             deinitModels();
+            deinitControls();
         }
 
         /*
          * 初始化函数 -------------------------------------------------------------
          */
+        private void initControls() 
+        {
+            if (null == mMainC)
+            {
+                mMainC = new MainControl();
+                mMainC.init(this);
+            }
+        }
+
+        private void deinitControls()
+        {
+            if (null != mMainC)
+            {
+                mMainC.deinit();
+                mMainC = null;
+            }
+        }
 
         private void initModels()
         {
@@ -122,8 +148,9 @@ namespace PDMTools
          */
         private void showTipMessage(string message)
         {
-            System.Windows.MessageBox.Show(this, message,
-                    (string)FindResource("tips"));
+            this.ShowMessageAsync((string)FindResource("tips"), 
+                message, MessageDialogStyle.Affirmative, 
+                new MetroDialogSettings() { AffirmativeButtonText = "确定" });
         }
 
         private string showSelectPathDialog(string tips)
@@ -173,6 +200,82 @@ namespace PDMTools
             mActionBarM.showState(state);
         }
 
+        private bool isAllValidBeforeStart(Defined.UiState state) {
+            switch (state) {
+                case Defined.UiState.SelectedFirmware:
+                    {
+                        if (mTemplateRootM.isValid(state) &&
+                            mFirmwareM.isValid(state) &&
+                            mLogM.isValid(state) &&
+                            mActionBarM.isValid(state))
+                        {
+                            return true;
+                        }
+                    }
+                    break;
+
+                case Defined.UiState.SelectedTool:
+                    {
+                        if (mTemplateRootM.isValid(state) &&
+                            mToolM.isValid(state) &&
+                            mLogM.isValid(state) &&
+                            mActionBarM.isValid(state))
+                        {
+                            return true;
+                        }
+                    }
+                    break;
+
+                case Defined.UiState.SelectedFirmwareAndTool:
+                    {
+                        if (mTemplateRootM.isValid(state) &&
+                            mFirmwareM.isValid(state) &&
+                            mToolM.isValid(state) &&
+                            mLogM.isValid(state) &&
+                            mActionBarM.isValid(state))
+                        {
+                            return true;
+                        }
+                    }
+                    break;
+
+                default:
+                    break;
+            }
+            return false;
+        }
+
+        private List<Operate> buildOperateListFromUi()
+        {
+            List<Operate> list = null;
+            switch (mUiState)
+            {
+                case Defined.UiState.SelectedFirmware:
+                    {
+                        list = mFirmwareM.getOperates();
+                    }
+                    break;
+
+                case Defined.UiState.SelectedTool:
+                    {
+                        list = mToolM.getOperates();
+                    }
+                    break;
+
+                case Defined.UiState.SelectedFirmwareAndTool:
+                    {
+                        list = mFirmwareM.getOperates();
+                        list = list.Union(mToolM.getOperates()).ToList<Operate>();
+                    }
+                    break;
+
+                default:
+                    break;
+            }
+
+            return list;
+        }
+
         /*
          * 界面交互函数 -------------------------------------------------------------
          */
@@ -193,6 +296,7 @@ namespace PDMTools
                 return;
             }
 
+            mLastUiState = mUiState;
             mUiState = Defined.UiState.SelectedTemplate;
             showCurState(mUiState);
         }
@@ -204,6 +308,7 @@ namespace PDMTools
                 case Defined.UiState.SelectedTemplate:
                 case Defined.UiState.SelectedFirmware:
                     {
+                        mLastUiState = mUiState;
                         mUiState = mFirmwareM.isNeedPublish() ?
                             Defined.UiState.SelectedFirmware :
                             Defined.UiState.SelectedTemplate;
@@ -213,6 +318,7 @@ namespace PDMTools
                 case Defined.UiState.SelectedTool:
                 case Defined.UiState.SelectedFirmwareAndTool:
                     {
+                        mLastUiState = mUiState;
                         mUiState = mFirmwareM.isNeedPublish() ?
                             Defined.UiState.SelectedFirmwareAndTool :
                             Defined.UiState.SelectedTool;
@@ -267,6 +373,7 @@ namespace PDMTools
                 case Defined.UiState.SelectedTemplate:
                 case Defined.UiState.SelectedTool:
                     {
+                        mLastUiState = mUiState;
                         mUiState = mToolM.isNeedPublish() ?
                             Defined.UiState.SelectedTool :
                             Defined.UiState.SelectedTemplate;
@@ -276,6 +383,7 @@ namespace PDMTools
                 case Defined.UiState.SelectedFirmware:
                 case Defined.UiState.SelectedFirmwareAndTool:
                     {
+                        mLastUiState = mUiState;
                         mUiState = mToolM.isNeedPublish() ?
                             Defined.UiState.SelectedFirmwareAndTool :
                             Defined.UiState.SelectedFirmware;
@@ -308,7 +416,35 @@ namespace PDMTools
 
         private void RunBtn_Click(object sender, RoutedEventArgs e)
         {
+            if (Defined.UiState.Doing == mUiState)
+            {
+                // 此时正在执行, 需停止
+                mUiState = mLastUiState;
+                mLastUiState = Defined.UiState.Doing;
+                showCurState(mUiState);
 
+                mMainC.stopGenerate();
+                return;
+            }
+
+            if (!isAllValidBeforeStart(mUiState))
+            {
+                showTipMessage((string)FindResource("can_not_start_because_of_some_invalid_inputs"));
+                return;
+            }
+
+            List<Operate> list = buildOperateListFromUi();
+            if (null == list)
+            {
+                showTipMessage((string)FindResource("can_not_start_because_of_build_list_failed"));
+                return;
+            }
+            mLastUiState = mUiState;
+            mUiState = Defined.UiState.Doing;
+            showCurState(mUiState);
+
+            mMainC.startGenerate(list, mLogM);
+            return;
         }
 
         private void ResetBtn_Click(object sender, RoutedEventArgs e)
@@ -321,10 +457,6 @@ namespace PDMTools
         {
             mLogM.clear();
             showCurState(mUiState);
-        }
-
-        
-        
+        } 
     }
-
 }

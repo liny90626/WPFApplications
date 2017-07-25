@@ -23,7 +23,7 @@
                 <Label Content="{StaticResource please_select_tool_file}" Height="Auto" Name="SelectToolFileLabel" Width="400" Padding="5" />
                 <Button Content="{StaticResource browser}" Height="Auto" Name="SelectToolFileBtn" Width="100" Margin="10,0" IsEnabled="False" Focusable="False" Click="SelectToolFileBtn_Click" />
             </StackPanel>
-            <TextBox Width="550" Height="120" Margin="10,10,10,0" Name="LogTxt" IsEnabled="True" IsReadOnly="True" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" />
+            <TextBox Width="550" Height="120" Margin="10,10,10,0" Name="LogTxt" IsEnabled="True" IsReadOnly="True" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" TextWrapping="Wrap" />
             <StackPanel Height="Auto" Margin="10,10,10,0" Width="550" Orientation="Horizontal">
                 <StackPanel Height="Auto" Width="400" Orientation="Horizontal">
                     <Button Content="{StaticResource start}" Height="Auto" Name="RunBtn" Width="100" Margin="10,0" IsEnabled="False" Focusable="False" Click="RunBtn_Click" />

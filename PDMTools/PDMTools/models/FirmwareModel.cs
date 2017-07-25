@@ -6,6 +6,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Text.RegularExpressions;
 using PDMTools.defined;
+using PDMTools.datas;
 
 namespace PDMTools.models
 {
@@ -218,6 +219,81 @@ namespace PDMTools.models
 
             Regex rgx = new Regex(@"[\d]{1,4}[.][\d]{1,4}[.][\d]{1,4}[.][\d]{1,4}");
             return rgx.IsMatch(filename);
+        }
+
+        public List<Operate> getOperates()
+        {
+            if (!isInited())
+            {
+                return null;
+            }
+
+            // 只生成列表, 不具体计算, 避免主线程开销
+            List<Operate> list = new List<Operate>();
+
+            // Img file
+            Operate curOp = new Operate();
+            curOp.type = Defined.OperateType.CalcFileVersion;
+            curOp.key = Defined.KeyName.ImgFileVersion.ToString();
+            curOp.value = mFirmwareImgLabel.Content.ToString();
+            list.Add(curOp);
+
+            curOp = new Operate();
+            curOp.type = Defined.OperateType.CalcFileMd5;
+            curOp.key = Defined.KeyName.ImgFileMd5.ToString();
+            curOp.value = mFirmwareImgLabel.Content.ToString();
+            list.Add(curOp);
+
+            curOp = new Operate();
+            curOp.type = Defined.OperateType.CalcFileModifiedTime;
+            curOp.key = Defined.KeyName.ImgFileModifiedTime.ToString();
+            curOp.value = mFirmwareImgLabel.Content.ToString();
+            list.Add(curOp);
+
+            curOp = new Operate();
+            curOp.type = Defined.OperateType.CalcFileSize;
+            curOp.key = Defined.KeyName.ImgFileSize.ToString();
+            curOp.value = mFirmwareImgLabel.Content.ToString();
+            list.Add(curOp);
+
+            curOp = new Operate();
+            curOp.type = Defined.OperateType.CalcFileSizeByManual;
+            curOp.key = Defined.KeyName.ImgFileSizeByManual.ToString();
+            curOp.value = mFirmwareImgLabel.Content.ToString();
+            list.Add(curOp);
+
+            // Zip file
+            curOp = new Operate();
+            curOp.type = Defined.OperateType.CalcFileVersion;
+            curOp.key = Defined.KeyName.ZipFileMd5.ToString();
+            curOp.value = mFirmwareZipLabel.Content.ToString();
+            list.Add(curOp);
+
+            curOp = new Operate();
+            curOp.type = Defined.OperateType.CalcFileMd5;
+            curOp.key = Defined.KeyName.ZipFileMd5.ToString();
+            curOp.value = mFirmwareZipLabel.Content.ToString();
+            list.Add(curOp);
+
+            curOp = new Operate();
+            curOp.type = Defined.OperateType.CalcFileModifiedTime;
+            curOp.key = Defined.KeyName.ZipFileModifiedTime.ToString();
+            curOp.value = mFirmwareZipLabel.Content.ToString();
+            list.Add(curOp);
+
+            curOp = new Operate();
+            curOp.type = Defined.OperateType.CalcFileSize;
+            curOp.key = Defined.KeyName.ZipFileSize.ToString();
+            curOp.value = mFirmwareZipLabel.Content.ToString();
+            list.Add(curOp);
+
+            curOp = new Operate();
+            curOp.type = Defined.OperateType.CalcFileSizeByManual;
+            curOp.key = Defined.KeyName.ZipFileSizeByManual.ToString();
+            curOp.value = mFirmwareZipLabel.Content.ToString();
+            list.Add(curOp);
+
+            return list;
         }
     }
 }

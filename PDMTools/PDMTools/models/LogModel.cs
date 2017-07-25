@@ -74,6 +74,8 @@ namespace PDMTools.models
             {
                 return;
             }
+
+            mLogTextBox.Text += (line + Environment.NewLine);
         }
 
         public void clear()
