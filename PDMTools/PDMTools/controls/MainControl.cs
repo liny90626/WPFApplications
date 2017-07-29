@@ -68,8 +68,8 @@ namespace PDMTools.controls
             mCts = new CancellationTokenSource();
             mGenerateTask = new Task(() => run(mCts.Token, operateList), mCts.Token);
 
-            mLogM.print((string)mWin.FindResource("start_split"));
             mLogM.print((string)mWin.FindResource("start_generate_task_success"));
+            mLogM.print((string)mWin.FindResource("start_split"));
             mGenerateTask.Start();
             return 0;
         }
@@ -96,8 +96,8 @@ namespace PDMTools.controls
 
             if (null != mLogM)
             {
-                mLogM.print((string)mWin.FindResource("stop_generate_task_success"));
                 mLogM.print((string)mWin.FindResource("end_split"));
+                mLogM.print((string)mWin.FindResource("stop_generate_task_success"));
                 mLogM = null;
             }
             return 0;
@@ -112,10 +112,23 @@ namespace PDMTools.controls
         private void run(CancellationToken ct, List<Operate> operateList)
         {
             // load list
-            operateList = loadList(ct, operateList);
+            List<Operate> paramsList = loadParamsList(ct, operateList);
+            if (null == paramsList)
+            {
+                completed();
+                return;
+            }
+
+            List<Operate> outputsList = loadOutputsList(ct, operateList);
+            if (null == outputsList)
+            {
+                completed();
+                return;
+            }
 
             // print current list
-            printList(ct, operateList);
+            printList(ct, paramsList);
+            printList(ct, outputsList);
 
             // run list
             runList(ct, operateList);
@@ -124,80 +137,159 @@ namespace PDMTools.controls
             completed();  
         }
 
-        private List<Operate> loadList(CancellationToken ct, List<Operate> operateList)
+        private List<Operate> loadParamsList(CancellationToken ct, List<Operate> operateList)
         {
-            List<Operate> newList = new List<Operate>();
+            mLogM.print((string)mWin.FindResource("start_load_params_list"));
+
+            // 从excel文件中导入的PDM参数信息列表
+            List<Operate> paramsList = new List<Operate>();
+            // 从所选文件中获取的信息进行二次校验的列表
+            List<Operate> checkList = new List<Operate>();
             Operate newOp = null;
             foreach (Operate op in operateList)
             {
                 ct.ThrowIfCancellationRequested();
 
-                if (null == op)
-                {
-                    continue;
-                }
-
                 switch (op.type)
                 {
                     case Defined.OperateType.LoadTempalteParams:
                         {
-                            newList = newList.Union(
+                            mLogM.print((string)mWin.FindResource("loading_template_params"));
+                            paramsList = paramsList.Union(
                                 mExcelC.loadTemplateParams(op)).ToList<Operate>();
                         }
                         break;
 
                     case Defined.OperateType.CalcFileVersion:
                         {
+                            mLogM.print((string)mWin.FindResource("calc_file_version"));
                             newOp = mFileC.calcFileVersion(op);
-                            if (null != newOp)
+                            if (null == newOp)
                             {
-                                newList.Add(newOp);
+                                mLogM.print((string)mWin.FindResource("calc_file_version_failed"));
+                                return null;
                             }
+                            checkList.Add(newOp);
                         }
                         break;
 
                     case Defined.OperateType.CalcFileMd5:
                         {
+                            mLogM.print((string)mWin.FindResource("calc_file_md5"));
                             newOp = mFileC.calcFileMd5(op);
-                            if (null != newOp)
+                            if (null == newOp)
                             {
-                                newList.Add(newOp);
+                                mLogM.print((string)mWin.FindResource("calc_file_md5_failed"));
+                                return null;
                             }
+                            paramsList.Add(newOp);
                         }
                         break;
 
                     case Defined.OperateType.CalcFileModifiedTime:
                         {
+                            mLogM.print((string)mWin.FindResource("calc_file_modified_time"));
                             newOp = mFileC.calcFileModifiedTime(op);
-                            if (null != newOp)
+                            if (null == newOp)
                             {
-                                newList.Add(newOp);
+                                mLogM.print((string)mWin.FindResource("calc_file_modified_time_failed"));
+                                return null;
                             }
+                            paramsList.Add(newOp);
                         }
                         break;
 
                     case Defined.OperateType.CalcFileSizeByBytes:
                         {
+                            mLogM.print((string)mWin.FindResource("calc_file_size"));
                             newOp = mFileC.calcFileSizeBytes(op);
-                            if (null != newOp)
+                            if (null == newOp)
                             {
-                                newList.Add(newOp);
+                                mLogM.print((string)mWin.FindResource("calc_file_size_failed"));
+                                return null;
                             }
+                            paramsList.Add(newOp);
                         }
                         break;
 
                     case Defined.OperateType.CalcFileSizeByM:
                         {
+                            mLogM.print((string)mWin.FindResource("calc_file_size"));
                             newOp = mFileC.calcFileSizeByM(op);
-                            if (null != newOp)
+                            if (null == newOp)
                             {
-                                newList.Add(newOp);
+                                mLogM.print((string)mWin.FindResource("calc_file_size_failed"));
+                                return null;
                             }
+                            paramsList.Add(newOp);
                         }
                         break;
 
+                    case Defined.OperateType.CheckItem:
+                        checkList.Add(op);
+                        break;
+
                     case Defined.OperateType.ReplaceWord:
-                        newList.Add(op);
+                        paramsList.Add(op);
+                        break;
+
+                    case Defined.OperateType.OutputFile:
+                    default:
+                        break;
+                }
+            }
+
+            if (!checkParamsList(paramsList, checkList))
+            {
+                mLogM.print((string)mWin.FindResource("check_params_list_failed"));
+                return null;
+            }
+
+            return paramsList;
+        }
+
+        private bool checkParamsList(List<Operate> paramsList, List<Operate> checkList)
+        {
+            if (null == paramsList || null == checkList)
+            {
+                return false;
+            }
+
+            foreach (Operate checkOp in checkList)
+            { 
+                // 校验列表时不再判断操作类型, 主要校验键值对, 并且大小写不敏感
+                foreach (Operate paramOp in paramsList)
+                {
+                    if (checkOp.key.Equals(paramOp.key, StringComparison.CurrentCultureIgnoreCase))
+                    {
+                        if (checkOp.value.Equals(paramOp.value, StringComparison.CurrentCultureIgnoreCase))
+                        {
+                            break;
+                        }
+                        mLogM.print(paramOp.key + "(" + paramOp.value + ")" + " != "
+                            + checkOp.key + "(" + checkOp.value + ")");
+                        return false;
+                    }
+                }
+            }
+
+            return true;
+        }
+
+        private List<Operate> loadOutputsList(CancellationToken ct, List<Operate> operateList)
+        {
+            mLogM.print((string)mWin.FindResource("start_load_outputs_list"));
+
+            // 输出文件列表
+            List<Operate> outputsList = new List<Operate>();
+            foreach (Operate op in operateList)
+            {
+                ct.ThrowIfCancellationRequested();
+
+                switch (op.type)
+                {
+                    case Defined.OperateType.OutputFile:
+                        outputsList.Add(op);
                         break;
 
                     default:
@@ -205,7 +297,7 @@ namespace PDMTools.controls
                 }
             }
 
-            return newList;
+            return outputsList;
         }
 
         private void printList(CancellationToken ct, List<Operate> operateList)

@@ -137,8 +137,13 @@ namespace PDMTools.models
 
             // Img file
             Operate curOp = new Operate();
+            curOp.type = Defined.OperateType.CheckItem;
+            curOp.key = Defined.KeyName.ImgFileName.ToString();
+            curOp.value = mFirmwareImgLabel.Content.ToString();
+
+            curOp = new Operate();
             curOp.type = Defined.OperateType.CalcFileVersion;
-            curOp.key = Defined.KeyName.ImgFileVersion.ToString();
+            curOp.key = Defined.KeyName.SoftwareVersion.ToString();
             curOp.value = mFirmwareImgLabel.Content.ToString();
             list.Add(curOp);
 
@@ -168,8 +173,13 @@ namespace PDMTools.models
 
             // Zip file
             curOp = new Operate();
+            curOp.type = Defined.OperateType.CheckItem;
+            curOp.key = Defined.KeyName.ZipFileName.ToString();
+            curOp.value = mFirmwareZipLabel.Content.ToString();
+
+            curOp = new Operate();
             curOp.type = Defined.OperateType.CalcFileVersion;
-            curOp.key = Defined.KeyName.ZipFileMd5.ToString();
+            curOp.key = Defined.KeyName.SoftwareVersion.ToString();
             curOp.value = mFirmwareZipLabel.Content.ToString();
             list.Add(curOp);
 

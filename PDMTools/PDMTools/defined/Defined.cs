@@ -25,28 +25,32 @@ namespace PDMTools.defined
             CalcFileModifiedTime,
             CalcFileSizeByBytes,
             CalcFileSizeByM,
+            CheckItem,
             ReplaceWord,
+            OutputFile,
         }
 
         /* 静态键值名称 */
         public enum KeyName
         {
             TemplateRoot = 0,
-            ImgFileVersion,
+            ImgFileName,
             ImgFileMd5,
             ImgFileModifiedTime,
             ImgFileSize,
             ImgFileSizeByManual,
-            ZipFileVersion,
+            ZipFileName,
             ZipFileMd5,
             ZipFileModifiedTime,
             ZipFileSize,
             ZipFileSizeByManual,
-            ToolFileVersion,
+            SoftwareVersion,
+            ToolFileName,
             ToolFileMd5,
             ToolFileModifiedTime,
             ToolFileSize,
             ToolFileSizeByManual,
+            ToolVersion,
         }
     }
 }

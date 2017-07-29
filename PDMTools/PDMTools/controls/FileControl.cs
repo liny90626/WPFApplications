@@ -27,12 +27,28 @@ namespace PDMTools.controls
             }
             
             string filename = System.IO.Path.GetFileNameWithoutExtension(op.value);
-            Regex rgx = new Regex(@"[\d]{1,4}[.][\d]{1,4}[.][\d]{1,4}[.][\d]{1,4}");
-            string version = rgx.Match(filename).ToString();
+            
+            // 获取版本
+            Regex rgxVersion = new Regex(@"[\d]{1,4}[.][\d]{1,4}[.][\d]{1,4}[.][\d]{1,4}");
+            string version = rgxVersion.Match(filename).ToString();
             if (null == version)
             {
                 return null;
             }
+
+            // 获取机型
+            Regex rgxDevice = new Regex(@"([a-zA-Z]{1,3}[\d]{1,3}[a-zA-Z]{1,3})-");
+            string device = rgxDevice.Match(filename).ToString();
+            if (null != device)
+            {
+                version = "V" + version + "-" + device.Replace("-", "");
+            }
+            else
+            { 
+                // 文件名中允许不含有机型
+                version = "V" + version;
+            }
+            
 
             Operate newOp = new Operate();
             newOp.type = Defined.OperateType.ReplaceWord;

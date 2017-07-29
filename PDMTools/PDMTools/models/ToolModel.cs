@@ -125,8 +125,13 @@ namespace PDMTools.models
 
             // Tool file
             Operate curOp = new Operate();
+            curOp.type = Defined.OperateType.CheckItem;
+            curOp.key = Defined.KeyName.ToolFileName.ToString();
+            curOp.value = mToolLabel.Content.ToString();
+
+            curOp = new Operate();
             curOp.type = Defined.OperateType.CalcFileVersion;
-            curOp.key = Defined.KeyName.ToolFileVersion.ToString();
+            curOp.key = Defined.KeyName.ToolVersion.ToString();
             curOp.value = mToolLabel.Content.ToString();
             list.Add(curOp);
 
