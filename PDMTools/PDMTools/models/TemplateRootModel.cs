@@ -5,6 +5,7 @@ using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using PDMTools.defined;
+using PDMTools.datas;
 
 namespace PDMTools.models
 {
@@ -96,6 +97,25 @@ namespace PDMTools.models
             }
 
             return false;
+        }
+
+        public override List<Operate> getOperates()
+        {
+            if (!isInited())
+            {
+                return null;
+            }
+
+            // 只生成列表, 不具体计算, 避免主线程开销
+            List<Operate> list = new List<Operate>();
+
+            // Template Root
+            Operate curOp = new Operate();
+            curOp.type = Defined.OperateType.LoadTempalteParams;
+            curOp.key = Defined.KeyName.TemplateRoot.ToString();
+            curOp.value = mTemplateRootLabel.Content.ToString();
+            list.Add(curOp);
+            return list;
         }
 
         public void setSelectedPath(string selectedPath)

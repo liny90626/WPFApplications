@@ -64,7 +64,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="language\zh-CN.xaml">
+    <Page Include="langs\zh-CN.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -76,8 +76,11 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="controls\ExcelControl.cs" />
+    <Compile Include="controls\FileControl.cs" />
     <Compile Include="controls\MainControl.cs" />
     <Compile Include="defined\Defined.cs" />
+    <Compile Include="helpers\ExcelHelper.cs" />
     <Compile Include="models\LogModel.cs" />
     <Compile Include="models\FirmwareModel.cs" />
     <Compile Include="models\ToolModel.cs" />

@@ -5,6 +5,7 @@ using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using PDMTools.defined;
+using PDMTools.datas;
 
 namespace PDMTools.models
 {
@@ -88,5 +89,11 @@ namespace PDMTools.models
 
             return true;
         }
+
+        public override List<Operate> getOperates()
+        {
+            return null;
+        }
+
     }
 }

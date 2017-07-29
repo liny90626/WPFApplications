@@ -57,6 +57,19 @@ namespace PDMTools
         }
 
         /*
+         * 外部可操作函数 ---------------------------------------------------------
+         */
+        public void taskCompleted()
+        {
+            // 停止
+            mUiState = mLastUiState;
+            mLastUiState = Defined.UiState.Doing;
+            showCurState(mUiState);
+            mMainC.stopGenerate();
+        }
+
+
+        /*
          * 初始化函数 -------------------------------------------------------------
          */
         private void initControls() 
@@ -247,30 +260,30 @@ namespace PDMTools
 
         private List<Operate> buildOperateListFromUi()
         {
-            List<Operate> list = null;
+            List<Operate> list = mTemplateRootM.getOperates(); ;
             switch (mUiState)
             {
                 case Defined.UiState.SelectedFirmware:
                     {
-                        list = mFirmwareM.getOperates();
+                        list = list.Union(mFirmwareM.getOperates()).ToList<Operate>();
                     }
                     break;
 
                 case Defined.UiState.SelectedTool:
                     {
-                        list = mToolM.getOperates();
+                        list = list.Union(mToolM.getOperates()).ToList<Operate>();
                     }
                     break;
 
                 case Defined.UiState.SelectedFirmwareAndTool:
                     {
-                        list = mFirmwareM.getOperates();
+                        list = list.Union(mFirmwareM.getOperates()).ToList<Operate>();
                         list = list.Union(mToolM.getOperates()).ToList<Operate>();
                     }
                     break;
 
                 default:
-                    break;
+                    return null;
             }
 
             return list;
@@ -418,12 +431,7 @@ namespace PDMTools
         {
             if (Defined.UiState.Doing == mUiState)
             {
-                // 此时正在执行, 需停止
-                mUiState = mLastUiState;
-                mLastUiState = Defined.UiState.Doing;
-                showCurState(mUiState);
-
-                mMainC.stopGenerate();
+                taskCompleted();
                 return;
             }
 

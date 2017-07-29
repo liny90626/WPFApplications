@@ -5,6 +5,7 @@ using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using PDMTools.defined;
+using PDMTools.datas;
 
 namespace PDMTools.models
 {
@@ -31,5 +32,6 @@ namespace PDMTools.models
 
         public abstract void showState(Defined.UiState state);
         public abstract bool isValid(Defined.UiState state);
+        public abstract List<Operate> getOperates();
     }
 }

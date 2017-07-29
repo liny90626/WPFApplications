@@ -3,21 +3,25 @@
                     xmlns:sys="clr-namespace:System;assembly=mscorlib">
     <!-- B -->
     <sys:String x:Key="browser">浏览</sys:String>
+    <sys:String x:Key="byte_unit">字节</sys:String>
 
     <!-- C -->
     <sys:String x:Key="can_not_start_because_of_build_list_failed">根据填写数据构建链表失败, 无法开始</sys:String>
     <sys:String x:Key="can_not_start_because_of_some_invalid_inputs">存在非法输入, 无法开始</sys:String>
     <sys:String x:Key="clear_log">清空日志</sys:String>
     <sys:String x:Key="control_is_not_inited">逻辑模块未初始化!</sys:String>
-        
+
+    <!-- E -->
+    <sys:String x:Key="end_split">################## 结束 ###################</sys:String>
+
     <!-- F -->
     <sys:String x:Key="filter_img_file">固件烧写文件(*.img)|*.img</sys:String>
     <sys:String x:Key="filter_tool_file">生产工具文件(*.zip)|*.zip|生产工具文件(*.rar)|*.rar</sys:String>
     <sys:String x:Key="filter_zip_file">固件升级文件(*.zip)|*.zip</sys:String>
 
-    <!-- F -->
-    <sys:String x:Key="start_generate_task_failed_task_repeated">任务开始失败, 已有任务在运行!</sys:String>
-
+    <!-- M -->
+    <sys:String x:Key="million_bytes_unit">MB</sys:String>
+    
     <!-- P -->
     <sys:String x:Key="pdm_tools">PDM工具</sys:String>
     <sys:String x:Key="please_select_template_root">请选择要使用的模板根目录...</sys:String>
@@ -36,9 +40,18 @@
     <sys:String x:Key="selected_path_can_not_be_empty">所选路径不可为空!</sys:String>
     <sys:String x:Key="selected_path_is_invalid">所选路径非法!</sys:String>
     <sys:String x:Key="start">开始</sys:String>
+    <sys:String x:Key="start_generate_task_failed_task_repeated">任务开始失败, 已有任务在运行!</sys:String>
+    <sys:String x:Key="start_generate_task_success">任务开始执行!</sys:String>
+    <sys:String x:Key="start_split">################## 开始 ###################</sys:String>
     <sys:String x:Key="stop">停止</sys:String>
+    <sys:String x:Key="stop_generate_task_failed">任务停止失败!</sys:String>
+    <sys:String x:Key="stop_generate_task_success">任务停止成功!</sys:String>
 
     <!-- T -->
+    <sys:String x:Key="template_params_sheet_name">参数列表</sys:String>
+    <sys:String x:Key="template_params_file_name">PDM信息.xlsx</sys:String>
+    <sys:String x:Key="template_params_file_name2">PDM信息.xls</sys:String>
+    <sys:String x:Key="template_">PDM信息</sys:String>
     <sys:String x:Key="tips">提示</sys:String>
 
     <!-- V -->

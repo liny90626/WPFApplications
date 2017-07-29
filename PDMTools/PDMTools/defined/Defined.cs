@@ -19,18 +19,20 @@ namespace PDMTools.defined
 
         public enum OperateType
         {
-            CalcFileVersion = 0,
+            LoadTempalteParams = 0,
+            CalcFileVersion,
             CalcFileMd5,
             CalcFileModifiedTime,
-            CalcFileSize,
-            CalcFileSizeByManual,
+            CalcFileSizeByBytes,
+            CalcFileSizeByM,
             ReplaceWord,
         }
 
         /* 静态键值名称 */
         public enum KeyName
         {
-            ImgFileVersion = 0,
+            TemplateRoot = 0,
+            ImgFileVersion,
             ImgFileMd5,
             ImgFileModifiedTime,
             ImgFileSize,

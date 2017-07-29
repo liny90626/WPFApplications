@@ -113,6 +113,50 @@ namespace PDMTools.models
             return false;        
         }
 
+        public override List<Operate> getOperates()
+        {
+            if (!isInited())
+            {
+                return null;
+            }
+
+            // 只生成列表, 不具体计算, 避免主线程开销
+            List<Operate> list = new List<Operate>();
+
+            // Tool file
+            Operate curOp = new Operate();
+            curOp.type = Defined.OperateType.CalcFileVersion;
+            curOp.key = Defined.KeyName.ToolFileVersion.ToString();
+            curOp.value = mToolLabel.Content.ToString();
+            list.Add(curOp);
+
+            curOp = new Operate();
+            curOp.type = Defined.OperateType.CalcFileMd5;
+            curOp.key = Defined.KeyName.ToolFileMd5.ToString();
+            curOp.value = mToolLabel.Content.ToString();
+            list.Add(curOp);
+
+            curOp = new Operate();
+            curOp.type = Defined.OperateType.CalcFileModifiedTime;
+            curOp.key = Defined.KeyName.ToolFileModifiedTime.ToString();
+            curOp.value = mToolLabel.Content.ToString();
+            list.Add(curOp);
+
+            curOp = new Operate();
+            curOp.type = Defined.OperateType.CalcFileSizeByBytes;
+            curOp.key = Defined.KeyName.ToolFileSize.ToString();
+            curOp.value = mToolLabel.Content.ToString();
+            list.Add(curOp);
+
+            curOp = new Operate();
+            curOp.type = Defined.OperateType.CalcFileSizeByM;
+            curOp.key = Defined.KeyName.ToolFileSizeByManual.ToString();
+            curOp.value = mToolLabel.Content.ToString();
+            list.Add(curOp);
+
+            return list;
+        }
+
         public bool isNeedPublish()
         {
             if (!isInited())
@@ -164,50 +208,6 @@ namespace PDMTools.models
 
             Regex rgx = new Regex(@"[\d]{1,4}[.][\d]{1,4}[.][\d]{1,4}[.][\d]{1,4}");
             return rgx.IsMatch(filename);
-        }
-
-        public List<Operate> getOperates()
-        {
-            if (!isInited())
-            {
-                return null;
-            }
-
-            // 只生成列表, 不具体计算, 避免主线程开销
-            List<Operate> list = new List<Operate>();
-
-            // Tool file
-            Operate curOp = new Operate();
-            curOp.type = Defined.OperateType.CalcFileVersion;
-            curOp.key = Defined.KeyName.ToolFileVersion.ToString();
-            curOp.value = mToolLabel.Content.ToString();
-            list.Add(curOp);
-
-            curOp = new Operate();
-            curOp.type = Defined.OperateType.CalcFileMd5;
-            curOp.key = Defined.KeyName.ToolFileMd5.ToString();
-            curOp.value = mToolLabel.Content.ToString();
-            list.Add(curOp);
-
-            curOp = new Operate();
-            curOp.type = Defined.OperateType.CalcFileModifiedTime;
-            curOp.key = Defined.KeyName.ToolFileModifiedTime.ToString();
-            curOp.value = mToolLabel.Content.ToString();
-            list.Add(curOp);
-
-            curOp = new Operate();
-            curOp.type = Defined.OperateType.CalcFileSize;
-            curOp.key = Defined.KeyName.ToolFileSize.ToString();
-            curOp.value = mToolLabel.Content.ToString();
-            list.Add(curOp);
-
-            curOp = new Operate();
-            curOp.type = Defined.OperateType.CalcFileSizeByManual;
-            curOp.key = Defined.KeyName.ToolFileSizeByManual.ToString();
-            curOp.value = mToolLabel.Content.ToString();
-            list.Add(curOp);
-
-            return list;
         }
     }
 }
