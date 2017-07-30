@@ -69,7 +69,7 @@ namespace PDMTools.models
             return true;
         }
 
-        public override List<Operate> getOperates()
+        public override List<Operate> getOperates(Defined.UiState state)
         {
             return null;
         }
@@ -82,8 +82,13 @@ namespace PDMTools.models
             }
             
             // async print
-            mWin.Dispatcher.BeginInvoke(new Action(() 
-                => mLogTextBox.Text += (line + Environment.NewLine)));
+            mWin.Dispatcher.BeginInvoke(new Action(()
+                =>
+                {
+                    mLogTextBox.Text += (DateTime.Now.ToString("[hh:mm:ss] ")
+                        + line + Environment.NewLine);
+                    mLogTextBox.ScrollToEnd();
+                }));
         }
 
         public void clear()

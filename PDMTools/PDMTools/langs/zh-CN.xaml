@@ -6,7 +6,7 @@
     <sys:String x:Key="byte_unit">字节</sys:String>
 
     <!-- C -->
-    <sys:String x:Key="calc_file_md5">计算文件中...</sys:String>
+    <sys:String x:Key="calc_file_md5">计算文件MD5中...</sys:String>
     <sys:String x:Key="calc_file_md5_failed">计算文件MD5失败!</sys:String>
     <sys:String x:Key="calc_file_modified_time">计算文件修改时间中...</sys:String>
     <sys:String x:Key="calc_file_modified_time_failed">计算文件修改时间失败!</sys:String>
@@ -20,8 +20,15 @@
     <sys:String x:Key="clear_log">清空日志</sys:String>
     <sys:String x:Key="control_is_not_inited">逻辑模块未初始化!</sys:String>
 
+    <!-- D -->
+    <sys:String x:Key="do_replace_and_generate">执行替换和生成动作...</sys:String>
+    <sys:String x:Key="do_replace_and_generate_failed">执行替换和生成动作失败!</sys:String>
+    <sys:String x:Key="do_replace_and_generate_success">执行替换和生成动作成功.</sys:String>
+    
     <!-- E -->
     <sys:String x:Key="end_split">################## 结束 ###################</sys:String>
+    <sys:String x:Key="engineering_file">工程文件</sys:String>
+    <sys:String x:Key="explain_file">说明文件</sys:String>
 
     <!-- F -->
     <sys:String x:Key="filter_img_file">固件烧写文件(*.img)|*.img</sys:String>
@@ -30,11 +37,17 @@
 
     <!-- L -->
     <sys:String x:Key="loading_template_params">加载模板参数中...</sys:String>
+    <sys:String x:Key="loading_template_params_failed">加载模板参数失败!</sys:String>
 
     <!-- M -->
     <sys:String x:Key="million_bytes_unit">MB</sys:String>
-    
+
+    <!-- O -->
+    <sys:String x:Key="output_folder_firmware">固件工程文件</sys:String>
+    <sys:String x:Key="output_folder_tool">工具工程文件</sys:String>
+
     <!-- P -->
+    <sys:String x:Key="pdm_publish">PDM发行</sys:String>
     <sys:String x:Key="pdm_tools">PDM工具</sys:String>
     <sys:String x:Key="please_select_template_root">请选择要使用的模板根目录...</sys:String>
     <sys:String x:Key="please_select_tool_file">请选择要发布的生产工具压缩文件...</sys:String>
@@ -54,8 +67,10 @@
     <sys:String x:Key="start">开始</sys:String>
     <sys:String x:Key="start_generate_task_failed_task_repeated">任务开始失败, 已有任务在运行!</sys:String>
     <sys:String x:Key="start_generate_task_success">任务开始执行!</sys:String>
+    <sys:String x:Key="start_load_inputs_list">开始加载输出输入文件列表...</sys:String>
     <sys:String x:Key="start_load_params_list">开始加载参数列表...</sys:String>
-    <sys:String x:Key="start_load_outputs_list">开始加载输出文件列表...</sys:String>
+    <sys:String x:Key="start_load_run_list">开始加载执行操作...</sys:String>
+    <sys:String x:Key="start_load_output_files">开始生成输出文件列表...</sys:String>
     <sys:String x:Key="start_split">################## 开始 ###################</sys:String>
     <sys:String x:Key="stop">停止</sys:String>
     <sys:String x:Key="stop_generate_task_failed">任务停止失败!</sys:String>
@@ -66,6 +81,7 @@
     <sys:String x:Key="template_params_sheet_name">参数列表</sys:String>
     <sys:String x:Key="template_params_row_name_key">键值</sys:String>
     <sys:String x:Key="template_params_row_name_value">内容</sys:String>
+    <sys:String x:Key="template_pdm_folder_name">PDM</sys:String>
     <sys:String x:Key="tips">提示</sys:String>
 
     <!-- V -->

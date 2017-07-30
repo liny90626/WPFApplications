@@ -125,9 +125,15 @@ namespace PDMTools.models
             return false;
         }
 
-        public override List<Operate> getOperates()
+        public override List<Operate> getOperates(Defined.UiState state)
         {
             if (!isInited())
+            {
+                return null;
+            }
+
+            if (Defined.UiState.SelectedFirmware != state
+                && Defined.UiState.SelectedFirmwareAndTool != state)
             {
                 return null;
             }
@@ -139,7 +145,9 @@ namespace PDMTools.models
             Operate curOp = new Operate();
             curOp.type = Defined.OperateType.CheckItem;
             curOp.key = Defined.KeyName.ImgFileName.ToString();
-            curOp.value = mFirmwareImgLabel.Content.ToString();
+            curOp.value = System.IO.Path.GetFileName(
+                mFirmwareImgLabel.Content.ToString());
+            list.Add(curOp);
 
             curOp = new Operate();
             curOp.type = Defined.OperateType.CalcFileVersion;
@@ -161,13 +169,13 @@ namespace PDMTools.models
 
             curOp = new Operate();
             curOp.type = Defined.OperateType.CalcFileSizeByBytes;
-            curOp.key = Defined.KeyName.ImgFileSize.ToString();
+            curOp.key = Defined.KeyName.ImgFileSizeByBytes.ToString();
             curOp.value = mFirmwareImgLabel.Content.ToString();
             list.Add(curOp);
 
             curOp = new Operate();
-            curOp.type = Defined.OperateType.CalcFileSizeByM;
-            curOp.key = Defined.KeyName.ImgFileSizeByManual.ToString();
+            curOp.type = Defined.OperateType.CalcFileSizeByMBs;
+            curOp.key = Defined.KeyName.ImgFileSizeByMBs.ToString();
             curOp.value = mFirmwareImgLabel.Content.ToString();
             list.Add(curOp);
 
@@ -175,7 +183,9 @@ namespace PDMTools.models
             curOp = new Operate();
             curOp.type = Defined.OperateType.CheckItem;
             curOp.key = Defined.KeyName.ZipFileName.ToString();
-            curOp.value = mFirmwareZipLabel.Content.ToString();
+            curOp.value = System.IO.Path.GetFileName(
+                mFirmwareZipLabel.Content.ToString());
+            list.Add(curOp);
 
             curOp = new Operate();
             curOp.type = Defined.OperateType.CalcFileVersion;
@@ -197,13 +207,13 @@ namespace PDMTools.models
 
             curOp = new Operate();
             curOp.type = Defined.OperateType.CalcFileSizeByBytes;
-            curOp.key = Defined.KeyName.ZipFileSize.ToString();
+            curOp.key = Defined.KeyName.ZipFileSizeByBytes.ToString();
             curOp.value = mFirmwareZipLabel.Content.ToString();
             list.Add(curOp);
 
             curOp = new Operate();
-            curOp.type = Defined.OperateType.CalcFileSizeByM;
-            curOp.key = Defined.KeyName.ZipFileSizeByManual.ToString();
+            curOp.type = Defined.OperateType.CalcFileSizeByMBs;
+            curOp.key = Defined.KeyName.ZipFileSizeByMBs.ToString();
             curOp.value = mFirmwareZipLabel.Content.ToString();
             list.Add(curOp);
 

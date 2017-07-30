@@ -32,6 +32,6 @@ namespace PDMTools.models
 
         public abstract void showState(Defined.UiState state);
         public abstract bool isValid(Defined.UiState state);
-        public abstract List<Operate> getOperates();
+        public abstract List<Operate> getOperates(Defined.UiState state);
     }
 }

@@ -113,9 +113,15 @@ namespace PDMTools.models
             return false;        
         }
 
-        public override List<Operate> getOperates()
+        public override List<Operate> getOperates(Defined.UiState state)
         {
             if (!isInited())
+            {
+                return null;
+            }
+
+            if (Defined.UiState.SelectedTool != state
+                && Defined.UiState.SelectedFirmwareAndTool != state)
             {
                 return null;
             }
@@ -127,7 +133,9 @@ namespace PDMTools.models
             Operate curOp = new Operate();
             curOp.type = Defined.OperateType.CheckItem;
             curOp.key = Defined.KeyName.ToolFileName.ToString();
-            curOp.value = mToolLabel.Content.ToString();
+            curOp.value = System.IO.Path.GetFileName(
+                mToolLabel.Content.ToString());
+            list.Add(curOp);
 
             curOp = new Operate();
             curOp.type = Defined.OperateType.CalcFileVersion;
@@ -149,13 +157,13 @@ namespace PDMTools.models
 
             curOp = new Operate();
             curOp.type = Defined.OperateType.CalcFileSizeByBytes;
-            curOp.key = Defined.KeyName.ToolFileSize.ToString();
+            curOp.key = Defined.KeyName.ToolFileSizeByBytes.ToString();
             curOp.value = mToolLabel.Content.ToString();
             list.Add(curOp);
 
             curOp = new Operate();
-            curOp.type = Defined.OperateType.CalcFileSizeByM;
-            curOp.key = Defined.KeyName.ToolFileSizeByManual.ToString();
+            curOp.type = Defined.OperateType.CalcFileSizeByMBs;
+            curOp.key = Defined.KeyName.ToolFileSizeByMBs.ToString();
             curOp.value = mToolLabel.Content.ToString();
             list.Add(curOp);
 

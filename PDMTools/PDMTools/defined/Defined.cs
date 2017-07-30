@@ -7,6 +7,13 @@ namespace PDMTools.defined
 {
     public class Defined
     {
+        public const int ScanDirectoryFileMaxNumber = 10;
+        public const int ScanDirectoriesMaxDepth = 5;
+        public const int SupportFileMinNumber = 3;
+        public const int SupportFileMaxNumber = 10;
+
+        public const string OutputFolderPath = "C:\\Users\\LinKy\\Desktop\\WPF_PDMTools\\outputs";
+
         public enum UiState 
         {
             Idle = 0,
@@ -24,33 +31,37 @@ namespace PDMTools.defined
             CalcFileMd5,
             CalcFileModifiedTime,
             CalcFileSizeByBytes,
-            CalcFileSizeByM,
+            CalcFileSizeByMBs,
             CheckItem,
             ReplaceWord,
-            OutputFile,
+            InputFile,
         }
 
         /* 静态键值名称 */
         public enum KeyName
         {
             TemplateRoot = 0,
+            TemplateFirmwareFile,
+            TemplateToolFile,
+            TemplateRootFile,
             ImgFileName,
             ImgFileMd5,
             ImgFileModifiedTime,
-            ImgFileSize,
-            ImgFileSizeByManual,
+            ImgFileSizeByBytes,
+            ImgFileSizeByMBs,
             ZipFileName,
             ZipFileMd5,
             ZipFileModifiedTime,
-            ZipFileSize,
-            ZipFileSizeByManual,
+            ZipFileSizeByBytes,
+            ZipFileSizeByMBs,
             SoftwareVersion,
             ToolFileName,
             ToolFileMd5,
             ToolFileModifiedTime,
-            ToolFileSize,
-            ToolFileSizeByManual,
+            ToolFileSizeByBytes,
+            ToolFileSizeByMBs,
             ToolVersion,
+            OutputsFileList,
         }
     }
 }

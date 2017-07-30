@@ -117,7 +117,7 @@ namespace PDMTools.controls
             Operate newOp = new Operate();
             newOp.type = Defined.OperateType.ReplaceWord;
             newOp.key = op.key;
-            newOp.value = string.Format("{0:yyyy-MM-dd HH:mm:ss}", fi.LastWriteTime);
+            newOp.value = string.Format("{0:yyyy-MM-dd HH:mm}", fi.LastWriteTime);
             return newOp;
         }
 
@@ -153,7 +153,7 @@ namespace PDMTools.controls
 
         public Operate calcFileSizeByM(Operate op)
         {
-            if (null == op || Defined.OperateType.CalcFileSizeByM != op.type)
+            if (null == op || Defined.OperateType.CalcFileSizeByMBs != op.type)
             {
                 return null;
             }
@@ -179,6 +179,39 @@ namespace PDMTools.controls
             newOp.value = string.Format("{0:N1} {1}",
                 fi.Length/1024/1024, mWin.FindResource("million_bytes_unit"));
             return newOp;
+        }
+
+        public void backupLastOutputs(string outputFolderPath)
+        {
+            if (System.IO.Directory.Exists(outputFolderPath))
+            {
+                DirectoryInfo folderBak = new DirectoryInfo(outputFolderPath);
+                folderBak.MoveTo(backupDstFolderName(outputFolderPath));
+            }
+
+            Directory.CreateDirectory(outputFolderPath);
+        }
+
+        public bool isExcelFile(string file)
+        {
+            string extention = System.IO.Path.GetExtension(file);
+
+            return ".xls".Equals(extention) || ".xlsx".Equals(extention);
+        }
+
+        public bool isWordFile(string file)
+        {
+            string extention = System.IO.Path.GetExtension(file);
+
+            return ".doc".Equals(extention) || ".docx".Equals(extention);
+        }
+
+        private string backupDstFolderName(string outputFolderPath)
+        {
+            string parentFolder = System.IO.Directory.GetParent(outputFolderPath).FullName;
+            string folderName = System.IO.Path.GetFileName(outputFolderPath) 
+                + DateTime.Now.ToString("_bak_yyyy_MM_dd_hh_mm_ss");
+            return parentFolder + Path.DirectorySeparatorChar + folderName;
         }
     }
 }

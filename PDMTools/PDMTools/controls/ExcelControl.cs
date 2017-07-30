@@ -113,11 +113,90 @@ namespace PDMTools.controls
             return paramsList;
         }
 
+        public int doReplaceAndGenerate(string dstFolder, Operate inputOp, List<Operate> paramsList)
+        {
+            if (null == dstFolder || null == paramsList ||
+                null == inputOp || inputOp.type != Defined.OperateType.InputFile)
+            {
+                return -1;
+            }
+
+            try
+            {
+                string dstFile = null;
+                if (Defined.KeyName.TemplateFirmwareFile.ToString().Equals(inputOp.key))
+                {
+                    dstFile = dstFolder + Path.DirectorySeparatorChar
+                        + mWin.FindResource("output_folder_firmware")
+                        + Path.DirectorySeparatorChar
+                        + System.IO.Path.GetFileName(inputOp.value);
+
+                }
+                else if (Defined.KeyName.TemplateToolFile.ToString().Equals(inputOp.key))
+                {
+                    dstFile = dstFolder + Path.DirectorySeparatorChar
+                        + mWin.FindResource("output_folder_tool")
+                        + Path.DirectorySeparatorChar
+                        + System.IO.Path.GetFileName(inputOp.value);
+                }
+                else if (Defined.KeyName.TemplateRootFile.ToString().Equals(inputOp.key))
+                {
+                    dstFile = dstFolder + Path.DirectorySeparatorChar
+                        + System.IO.Path.GetFileName(inputOp.value);
+                }
+                else
+                {
+                    return -1;
+                }
+
+                if (0 != _doReplaceAndGenerate(dstFile, inputOp.value, paramsList))
+                {
+                    return -1;
+                }
+            }
+            catch (Exception)
+            {
+                return -1;
+            }
+
+            return 0;
+        }
+
         private string getParamsFileName(string templateRoot, string extension)
         {
             return templateRoot + Path.DirectorySeparatorChar 
                 + mWin.FindResource("template_params_file_name")
                 + extension;
+        }
+
+        private int _doReplaceAndGenerate(string dstFile, string srcFile, List<Operate> paramsList)
+        {
+            try
+            {
+                Workbook excel = new Workbook();
+                excel.LoadFromFile(srcFile);
+                foreach (Operate param in paramsList)
+                {
+                    if (Defined.OperateType.ReplaceWord == param.type)
+                    {
+                        try
+                        {
+                            excel.Replace("${" + param.key + "}", param.value);
+                        }
+                        catch (Exception)
+                        {
+                            // 替换动作可能会因找不到key而触发Exception
+                        }
+                    }
+                }
+                excel.SaveToFile(dstFile);
+            }
+            catch (Exception)
+            {
+                return -1;
+            }
+
+            return 0;
         }
     }
 }

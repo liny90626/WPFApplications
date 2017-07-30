@@ -90,7 +90,7 @@ namespace PDMTools.models
             return true;
         }
 
-        public override List<Operate> getOperates()
+        public override List<Operate> getOperates(Defined.UiState state)
         {
             return null;
         }

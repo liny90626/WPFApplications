@@ -260,25 +260,25 @@ namespace PDMTools
 
         private List<Operate> buildOperateListFromUi()
         {
-            List<Operate> list = mTemplateRootM.getOperates(); ;
+            List<Operate> list = mTemplateRootM.getOperates(mUiState); ;
             switch (mUiState)
             {
                 case Defined.UiState.SelectedFirmware:
                     {
-                        list = list.Union(mFirmwareM.getOperates()).ToList<Operate>();
+                        list = list.Union(mFirmwareM.getOperates(mUiState)).ToList<Operate>();
                     }
                     break;
 
                 case Defined.UiState.SelectedTool:
                     {
-                        list = list.Union(mToolM.getOperates()).ToList<Operate>();
+                        list = list.Union(mToolM.getOperates(mUiState)).ToList<Operate>();
                     }
                     break;
 
                 case Defined.UiState.SelectedFirmwareAndTool:
                     {
-                        list = list.Union(mFirmwareM.getOperates()).ToList<Operate>();
-                        list = list.Union(mToolM.getOperates()).ToList<Operate>();
+                        list = list.Union(mFirmwareM.getOperates(mUiState)).ToList<Operate>();
+                        list = list.Union(mToolM.getOperates(mUiState)).ToList<Operate>();
                     }
                     break;
 
