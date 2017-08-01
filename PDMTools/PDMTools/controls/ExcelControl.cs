@@ -173,6 +173,12 @@ namespace PDMTools.controls
         {
             try
             {
+                DirectoryInfo dstDir = new DirectoryInfo(System.IO.Path.GetDirectoryName(dstFile));
+                if (!dstDir.Exists)
+                {
+                    dstDir.Create();
+                }
+
                 Workbook excel = new Workbook();
                 excel.LoadFromFile(srcFile);
                 foreach (Operate param in paramsList)

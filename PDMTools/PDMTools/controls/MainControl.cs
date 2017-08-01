@@ -16,6 +16,7 @@ namespace PDMTools.controls
         
         private FileControl mFileC = null;
         private ExcelControl mExcelC = null;
+        private DocControl mDocC = null;
 
         private LogModel mLogM = null;
 
@@ -29,11 +30,13 @@ namespace PDMTools.controls
             mWin = win;
             mFileC = new FileControl(win);
             mExcelC = new ExcelControl(win);
+            mDocC = new DocControl(win);
             mIsInited = true;
         }
 
         public void deinit()
         {
+            mDocC = null;
             mExcelC = null;
             mFileC = null;
             mWin = null;
@@ -440,22 +443,33 @@ namespace PDMTools.controls
 
                 if (mFileC.isExcelFile(inputOp.value))
                 {
-                    mLogM.print(inputOp.value
+                    mLogM.print("#" + inputOp.value + "#"
                             + mWin.FindResource("do_replace_and_generate"));
                     if (0 == mExcelC.doReplaceAndGenerate(dstFolder, inputOp, paramsList))
                     {
-                        mLogM.print(inputOp.value 
+                        mLogM.print("#" + inputOp.value + "#"
                             + mWin.FindResource("do_replace_and_generate_success"));
                     }
                     else
                     {
-                        mLogM.print(inputOp.value 
+                        mLogM.print("#" + inputOp.value + "#"
                             + mWin.FindResource("do_replace_and_generate_failed"));
                     }
                 }
                 else if (mFileC.isWordFile(inputOp.value))
                 {
-                    //
+                    mLogM.print("#" + inputOp.value + "#"
+                            + mWin.FindResource("do_replace_and_generate"));
+                    if (0 == mDocC.doReplaceAndGenerate(dstFolder, inputOp, paramsList))
+                    {
+                        mLogM.print("#" + inputOp.value + "#"
+                            + mWin.FindResource("do_replace_and_generate_success"));
+                    }
+                    else
+                    {
+                        mLogM.print("#" + inputOp.value + "#"
+                            + mWin.FindResource("do_replace_and_generate_failed"));
+                    }
                 }
             }
         }
