@@ -75,6 +75,7 @@
     <sys:String x:Key="stop">停止</sys:String>
     <sys:String x:Key="stop_generate_task_failed">任务停止失败!</sys:String>
     <sys:String x:Key="stop_generate_task_success">任务停止成功!</sys:String>
+    <sys:String x:Key="suffix_version_pdm_publish">版本PDM发行</sys:String>
 
     <!-- T -->
     <sys:String x:Key="template_params_file_name">PDM信息</sys:String>

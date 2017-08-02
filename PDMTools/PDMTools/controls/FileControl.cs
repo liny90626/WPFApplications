@@ -192,6 +192,17 @@ namespace PDMTools.controls
             Directory.CreateDirectory(outputFolderPath);
         }
 
+        public void doToolFileCopy(string dstFolder, Operate inputOp)
+        {
+            string dstFile = dstFolder + Path.DirectorySeparatorChar
+                    + mWin.FindResource("output_folder_tool")
+                    + Path.DirectorySeparatorChar
+                    + System.IO.Path.GetFileName(inputOp.value);
+
+            FileInfo fileInfo = new FileInfo(inputOp.value);
+            fileInfo.CopyTo(dstFile);
+        }
+
         public bool isExcelFile(string file)
         {
             string extention = System.IO.Path.GetExtension(file);

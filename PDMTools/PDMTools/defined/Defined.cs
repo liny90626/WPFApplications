@@ -12,8 +12,6 @@ namespace PDMTools.defined
         public const int SupportFileMinNumber = 3;
         public const int SupportFileMaxNumber = 10;
 
-        public const string OutputFolderPath = "C:\\Users\\LinKy\\Desktop\\WPF_PDMTools\\outputs";
-
         public enum UiState 
         {
             Idle = 0,
@@ -33,6 +31,7 @@ namespace PDMTools.defined
             CalcFileSizeByBytes,
             CalcFileSizeByMBs,
             CheckItem,
+            ToolItemNeedCopy,
             ReplaceWord,
             InputFile,
         }
@@ -61,6 +60,7 @@ namespace PDMTools.defined
             ToolFileSizeByBytes,
             ToolFileSizeByMBs,
             ToolVersion,
+            ToolFilePath,
             OutputsFileList,
         }
     }

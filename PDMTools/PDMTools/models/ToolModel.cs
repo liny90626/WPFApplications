@@ -137,6 +137,11 @@ namespace PDMTools.models
                 mToolLabel.Content.ToString());
             list.Add(curOp);
 
+            curOp.type = Defined.OperateType.ToolItemNeedCopy;
+            curOp.key = Defined.KeyName.ToolFileName.ToString();
+            curOp.value = mToolLabel.Content.ToString();
+            list.Add(curOp);
+
             curOp = new Operate();
             curOp.type = Defined.OperateType.CalcFileVersion;
             curOp.key = Defined.KeyName.ToolVersion.ToString();

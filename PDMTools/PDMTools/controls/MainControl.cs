@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.IO;
+using System.IO.Compression;
 using PDMTools.datas;
 using PDMTools.models;
 using PDMTools.defined;
@@ -144,7 +146,7 @@ namespace PDMTools.controls
             printList(ct, inputsList);
 
             // 执行列表
-            runList(ct, paramsList, inputsList);
+            runList(ct, paramsList, inputsList, operateList);
 
             // 通知UI
             completed();  
@@ -424,14 +426,17 @@ namespace PDMTools.controls
         }
 
         private void runList(CancellationToken ct, 
-            List<Operate> paramsList, List<Operate> inputsList)
+            List<Operate> paramsList, List<Operate> inputsList, List<Operate> operateList)
         {
             mLogM.print((string)mWin.FindResource("start_load_run_list"));
 
-            string dstFolder = Defined.OutputFolderPath;
+            string dstFolder = Environment.CurrentDirectory 
+                + System.IO.Path.DirectorySeparatorChar + "outputs";
+
             // 备份上一次输出目录, 并确保输出目录存在
             mFileC.backupLastOutputs(dstFolder);
 
+            bool hasError = false;
             foreach (Operate inputOp in inputsList)
             {
                 ct.ThrowIfCancellationRequested();
@@ -452,6 +457,7 @@ namespace PDMTools.controls
                     }
                     else
                     {
+                        hasError = true;
                         mLogM.print("#" + inputOp.value + "#"
                             + mWin.FindResource("do_replace_and_generate_failed"));
                     }
@@ -467,13 +473,55 @@ namespace PDMTools.controls
                     }
                     else
                     {
+                        hasError = true;
                         mLogM.print("#" + inputOp.value + "#"
                             + mWin.FindResource("do_replace_and_generate_failed"));
                     }
                 }
             }
+
+             foreach (Operate op in operateList)
+            {
+                ct.ThrowIfCancellationRequested();
+
+                if (op.type == Defined.OperateType.ToolItemNeedCopy)
+                {
+                    mFileC.doToolFileCopy(dstFolder, op);
+                }
+             }
+
+            if (!hasError) 
+            {
+                try
+                {
+                    string tmpZipFile = dstFolder + Path.PathSeparator
+                        + ".." + Path.PathSeparator + "tmp.zip";
+                    System.IO.Compression.ZipFile.CreateFromDirectory(dstFolder, tmpZipFile);
+
+                    FileInfo file = new FileInfo(tmpZipFile);
+                    file.MoveTo(dstFolder + Path.DirectorySeparatorChar
+                        + getPDMZipFileName(operateList));
+                }
+                catch (Exception)
+                {
+                }
+                
+            }
         }
 
+        private string getPDMZipFileName(List<Operate> operateList)
+        {
+            foreach (Operate op in operateList)
+            {
+                if (Defined.KeyName.ImgFileName.ToString().Equals(op.key))
+                {
+                    return System.IO.Path.GetFileNameWithoutExtension(op.value) 
+                        + mWin.FindResource("suffix_version_pdm_publish") + ".zip";
+                }
+            }
+
+            return "output.zip";
+        }
         
     }
 }
