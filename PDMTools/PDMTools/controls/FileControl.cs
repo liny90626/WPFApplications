@@ -39,7 +39,7 @@ namespace PDMTools.controls
             // 获取机型
             Regex rgxDevice = new Regex(@"([a-zA-Z]{1,3}[\d]{1,3}[a-zA-Z]{1,3})-");
             string device = rgxDevice.Match(filename).ToString();
-            if (null != device)
+            if (!string.IsNullOrWhiteSpace(device))
             {
                 version = "V" + version + "-" + device.Replace("-", "");
             }
@@ -48,7 +48,6 @@ namespace PDMTools.controls
                 // 文件名中允许不含有机型
                 version = "V" + version;
             }
-            
 
             Operate newOp = new Operate();
             newOp.type = Defined.OperateType.ReplaceWord;

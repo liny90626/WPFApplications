@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
-using System.Text.RegularExpressions;
 using PDMTools.defined;
 using PDMTools.datas;
 
@@ -224,8 +223,8 @@ namespace PDMTools.models
                 return false;
             }
 
-            Regex rgx = new Regex(@"[\d]{1,4}[.][\d]{1,4}[.][\d]{1,4}[.][\d]{1,4}");
-            return rgx.IsMatch(filename);
+            // 工具不再做版本号检查, 因为每个工具的版本号规则是不同的
+            return true;
         }
     }
 }

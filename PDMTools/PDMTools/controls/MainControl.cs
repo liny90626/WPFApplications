@@ -191,7 +191,16 @@ namespace PDMTools.controls
                                 mLogM.print((string)mWin.FindResource("calc_file_version_failed"));
                                 return null;
                             }
-                            checkList.Add(newOp);
+
+                            if (Defined.KeyName.ToolVersion.ToString().Equals(op.key) 
+                                && (string.IsNullOrWhiteSpace(newOp.value) || "V".Equals(newOp.value)))
+                            {
+                                // 此情况不校验判断ToolVersion
+                            } 
+                            else
+                            {
+                                checkList.Add(newOp);
+                            }
                         }
                         break;
 
