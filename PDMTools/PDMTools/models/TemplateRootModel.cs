@@ -233,6 +233,11 @@ namespace PDMTools.models
                 // 扫描目录中的子文件夹
                 foreach (DirectoryInfo folder in folders.GetDirectories())
                 {
+                    if (folder.Name.Equals(".svn"))
+                    {
+                        // 跳过SVN目录
+                        continue;
+                    }
                     fileList = fileList.Union(
                         getAllFiles(folder.FullName, ++depth)).ToList<FileInfo>();
                 }
