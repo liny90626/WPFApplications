@@ -1,0 +1,67 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+    <!-- A -->
+    <sys:String x:Key="app_name">Cfg Converter</sys:String>
+
+    <!-- B -->
+    <sys:String x:Key="browser">Browser</sys:String>
+
+    <!-- C -->
+    <sys:String x:Key="can_not_find_the_map">Can't find the map</sys:String>
+    <sys:String x:Key="change">Change</sys:String>
+    <sys:String x:Key="clear">Clear</sys:String>
+
+    <!-- F -->
+    <sys:String x:Key="filter_input_file">Excel File|*.xls;*.xlsx</sys:String>
+
+    <!-- F -->
+    <sys:String x:Key="generate_file">Generate file</sys:String>
+    
+    <!-- I -->
+    <sys:String x:Key="invalid_maps_sheet">Invalid maps sheet!</sys:String>
+
+    <!-- N -->
+    <sys:String x:Key="there_is_no_task_need_stop">There is no task need stop.</sys:String>
+    
+    <!-- O -->
+    <sys:String x:Key="ok">OK</sys:String>
+    <sys:String x:Key="open_file_err">Open file failed</sys:String>
+    <sys:String x:Key="output_folder_is_not_existed">Output folder is not existed.</sys:String>
+
+    <!-- P -->
+    <sys:String x:Key="please_select_valid_file_and_folder">Please select valid file and folder</sys:String>
+    <sys:String x:Key="please_select_your_input_file">Please select your input file...</sys:String>
+    <sys:String x:Key="please_select_your_output_folder">Please select your output folder...</sys:String>
+
+    <!-- R -->
+    <sys:String x:Key="read_datas_from_file_failed">Read datas from file failed</sys:String>
+    <sys:String x:Key="read_maps_from_file_failed">Read maps from file failed</sys:String>
+    <sys:String x:Key="reset">Reset</sys:String>
+    <sys:String x:Key="row_name_file">File Name</sys:String>
+    
+    <!-- S -->
+    <sys:String x:Key="selected_file_is_invalid">The selected file is invalid!</sys:String>
+    <sys:String x:Key="selected_folder_is_invalid">The selected folder is invalid!</sys:String>
+    <sys:String x:Key="sheet_name_datas">Datas</sys:String>
+    <sys:String x:Key="sheet_name_maps">Maps</sys:String>
+    <sys:String x:Key="start">Start</sys:String>
+    <sys:String x:Key="start_task_success">Start task success.</sys:String>
+    <sys:String x:Key="state_error">State Error!</sys:String>
+    <sys:String x:Key="stop">Stop</sys:String>
+    <sys:String x:Key="stop_task_success">Stop task success</sys:String>
+
+    <!-- T -->
+    <sys:String x:Key="task_has_been_started_already">Task has been started already.</sys:String>
+    <sys:String x:Key="task_is_finished">Task is finished.</sys:String>
+    
+    <sys:String x:Key="tips">Tips</sys:String>
+
+    <!-- V -->
+    <sys:String x:Key="version">Version</sys:String>
+    <sys:String x:Key="version_is_unknown">Version Unknown</sys:String>
+
+    <!-- W -->
+    <sys:String x:Key="write_file_failed">Write file failed</sys:String>
+
+</ResourceDictionary>
