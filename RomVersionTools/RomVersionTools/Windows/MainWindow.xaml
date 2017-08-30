@@ -1,0 +1,32 @@
+﻿<Controls:MetroWindow x:Class="RomVersionTools.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        xmlns:local="clr-namespace:RomVersionTools"
+        Title="{StaticResource app_name}" Width="800" Height="480" ResizeMode="NoResize" TitleCharacterCasing="Normal" NonActiveBorderBrush="#FFD3DEDE">
+    <StackPanel Width="780" Height="450" HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal">
+        <Viewbox Name="RomVersionTreeLoading" Width="630" Height="420" Stretch="None" Visibility="Collapsed">
+            <Controls:ProgressRing Width="100" Height="100" IsActive="true" />
+        </Viewbox>
+        <TreeView Name="RomVersionTree" Width="630" Height="420" Margin="5" HorizontalAlignment="Center" VerticalAlignment="Center" BorderThickness="0.5" Visibility="Visible">
+            <TreeView.ItemTemplate>
+                <HierarchicalDataTemplate DataType="{x:Type local:VersionNodeItem}" ItemsSource="{Binding Path=child}">
+                    <StackPanel Orientation="Horizontal">
+                        <Image VerticalAlignment="Center" Source="{Binding icon}" Width="16" Height="16" Margin="0,0,2,2" />
+                        <TextBox VerticalAlignment="Center" Text="{Binding nodeName}" Focusable="{Binding editable}" 
+                                 BorderThickness="0" Background="{x:Null}" LostFocus="NodeName_Modified" Cursor="Arrow" />
+                        <StackPanel.ToolTip>
+                            <TextBlock VerticalAlignment="Center" Text="{Binding desc}" TextWrapping="Wrap" MaxWidth="300" ></TextBlock>
+                        </StackPanel.ToolTip>
+                    </StackPanel>
+                </HierarchicalDataTemplate>
+            </TreeView.ItemTemplate>
+        </TreeView>
+        <StackPanel Width="130" Height="420" HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Vertical">
+            <Button Name="LoadBtn" Width="100" Height="32" HorizontalAlignment="Center" Margin="0, 20, 0, 10" Content="{StaticResource load}" FontSize="14" Click="LoadBtn_Click" />
+            <Button Name="ResetBtn" Width="100" Height="32" HorizontalAlignment="Center" Margin="10" Content="{StaticResource reset}" FontSize="14" Click="ResetBtn_Click" />
+            <Button Name="SaveBtn" Width="100" Height="32" HorizontalAlignment="Center" Margin="10" Content="{StaticResource save}" FontSize="14" Click="SaveBtn_Click" />
+            <Label Height="250" Width="130" Name="VersionLabel" Content="{StaticResource version_is_unknown}" HorizontalContentAlignment="Right" FontWeight="Bold" VerticalContentAlignment="Bottom" FontSize="10" HorizontalAlignment="Right" />
+        </StackPanel>
+    </StackPanel>
+</Controls:MetroWindow>

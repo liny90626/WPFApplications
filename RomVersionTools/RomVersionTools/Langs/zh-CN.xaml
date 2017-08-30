@@ -1,0 +1,62 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+    <!-- A -->
+    <sys:String x:Key="app_name">RomVersion Tools</sys:String>
+
+    <!-- B -->
+    <sys:String x:Key="browser">浏览</sys:String>
+
+    <!-- C -->
+    <sys:String x:Key="config">配置</sys:String>
+    <sys:String x:Key="current_node_name_is_invalid">版本信息非法, 所编辑值将重置</sys:String>
+    
+    <!-- D -->
+    <sys:String x:Key="desc_mod_level">精确机型层, 如R47, IT82等</sys:String>
+    <sys:String x:Key="desc_mod_x_level">模糊机型层, 如R4X, IT8X等</sys:String>
+    <sys:String x:Key="desc_same_version_level">同版本层, 如47.x.1.123, 82.x.2.123等</sys:String>
+    <sys:String x:Key="desc_version_level_1">一级版本层, 如V1, V2等</sys:String>
+    <sys:String x:Key="desc_version_level_2">二级版本层, 如V1.0, V2.1等</sys:String>
+    <sys:String x:Key="do_work">执行</sys:String>
+    
+    <!-- F -->
+    <sys:String x:Key="file_name">文件名</sys:String>
+    
+    <!-- L -->
+    <sys:String x:Key="load">加载</sys:String>
+    <sys:String x:Key="loaded">加载完成</sys:String>
+    <sys:String x:Key="loading">加载中...</sys:String>
+    <sys:String x:Key="load_failed">加载失败, 请检查路径是否正确</sys:String>
+    <sys:String x:Key="load_task_is_running_now">正在执行加载任务中, 请勿重复操作...</sys:String>
+    <sys:String x:Key="log">日志</sys:String>
+
+    <!-- M -->
+    
+    <!-- O -->
+    <sys:String x:Key="oem">定制客户</sys:String>
+    <sys:String x:Key="ok">确定</sys:String>
+
+    <!-- P -->
+    <sys:String x:Key="please_select_the_rom_version_path">请选择RomVersion的路径</sys:String>
+    
+    <!-- R -->
+    <sys:String x:Key="reset">重置</sys:String>
+
+    <!-- S -->
+    <sys:String x:Key="save">保存</sys:String>
+    <sys:String x:Key="saved">保存完成</sys:String>
+    <sys:String x:Key="saving">保存中...</sys:String>
+    <sys:String x:Key="save_failed">保存失败, 请检查路径是否有足够的操作权限</sys:String>
+    <sys:String x:Key="save_success">保存成功, 数据将会重新加载...</sys:String>
+    <sys:String x:Key="save_task_is_running_now">正在执行保存任务中, 请勿重复操作..</sys:String>
+    
+    <!-- T -->
+    <sys:String x:Key="tips">提示</sys:String>
+
+    <!-- V -->
+    <sys:String x:Key="version">版本号</sys:String>
+    <sys:String x:Key="version_is_unknown">版本号未知</sys:String>
+
+    <!-- W -->
+    <sys:String x:Key="warning">警告</sys:String>
+</ResourceDictionary>
