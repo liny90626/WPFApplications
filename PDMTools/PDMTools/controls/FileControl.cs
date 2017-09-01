@@ -175,8 +175,8 @@ namespace PDMTools.controls
             Operate newOp = new Operate();
             newOp.type = Defined.OperateType.ReplaceWord;
             newOp.key = op.key;
-            newOp.value = string.Format("{0:N1} {1}",
-                fi.Length/1024/1024, mWin.FindResource("million_bytes_unit"));
+            newOp.value = string.Format("{0:N2} {1}",
+                ((double)fi.Length)/1024/1024, mWin.FindResource("million_bytes_unit"));
             return newOp;
         }
 
