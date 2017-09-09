@@ -1,0 +1,48 @@
+﻿<UserControl x:Class="SmartChangelog.Windows.Fragments.IdleFragment"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+             mc:Ignorable="d" Width="400" Height="400" Margin="20" Loaded="UserControl_Loaded">
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel VerticalAlignment="Top" HorizontalAlignment="Center">
+            <Expander Header="{StaticResource svn_log_export_info}" IsExpanded="True" Width="400" BorderThickness="0" Background="#CC60A917">
+                <StackPanel Orientation="Vertical">
+                    <Label Margin="10, 0, 10, 0" Content="{StaticResource svn_branch_name}" />
+                    <TextBox Name="SvnBranchName" Width="360" Height="30" Margin="10, 0, 10, 0"
+                             Controls:TextBoxHelper.Watermark="{StaticResource svn_branch_name_tips}"
+                             Controls:TextBoxHelper.ClearTextButton="True" TextChanged="SvnBranchName_TextChanged" />
+                    <Label Margin="10, 10, 10, 0" Content="{StaticResource svn_last_version}" />
+                    <TextBox Name="SvnLastVersion" Width="360" Height="30" Margin="10, 0, 10, 0"
+                             Controls:TextBoxHelper.Watermark="{StaticResource svn_last_version_tips}"
+                             Controls:TextBoxHelper.ClearTextButton="True" TextChanged="SvnLastVersion_TextChanged" />
+                    <Label Margin="10, 10, 10, 0" Content="{StaticResource svn_current_version}" />
+                    <TextBox Name="SvnCurrentVersion" Width="360" Height="30" Margin="10, 0, 10, 10"
+                             Controls:TextBoxHelper.Watermark="{StaticResource svn_current_version_tips}"
+                             Controls:TextBoxHelper.ClearTextButton="True" TextChanged="SvnCurrentVersion_TextChanged" />
+                </StackPanel>
+            </Expander>
+            <Expander Header="{StaticResource git_log_export_info}" IsExpanded="False" Width="400" BorderThickness="0" Background="#CC60A917">
+                <StackPanel Orientation="Vertical">
+                    <Label Margin="10, 0, 10, 0" Content="{StaticResource git_repository_name}" />
+                    <TextBox Name="GitRepositoryName" Width="360" Height="30" Margin="10, 0, 10, 0"
+                             Controls:TextBoxHelper.Watermark="{StaticResource git_repository_name_tips}"
+                             Controls:TextBoxHelper.ClearTextButton="True" TextChanged="GitRepositoryName_TextChanged" />
+                    <Label Margin="10, 10, 10, 0" Content="{StaticResource git_branch_name}" />
+                    <TextBox Name="GitBranchName" Width="360" Height="30" Margin="10, 0, 10, 0"
+                         Controls:TextBoxHelper.Watermark="{StaticResource git_branch_name_tips}"
+                         Controls:TextBoxHelper.ClearTextButton="True" TextChanged="GitBranchName_TextChanged" />
+                    <Label Margin="10, 10, 10, 0" Content="{StaticResource git_last_version}" />
+                    <TextBox Name="GitLastVersion" Width="360" Height="30" Margin="10, 0, 10, 10"
+                             Controls:TextBoxHelper.Watermark="{StaticResource git_last_version_tips}"
+                             Controls:TextBoxHelper.ClearTextButton="True" TextChanged="GitLastVersion_TextChanged" />
+                    <Label Margin="10, 10, 10, 0" Content="{StaticResource git_current_version}" />
+                    <TextBox Name="GitCurrentVersion" Width="360" Height="30" Margin="10, 0, 10, 10"
+                             Controls:TextBoxHelper.Watermark="{StaticResource git_current_version_tips}"
+                             Controls:TextBoxHelper.ClearTextButton="True" TextChanged="GitCurrentVersion_TextChanged" />
+                </StackPanel>
+            </Expander>
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

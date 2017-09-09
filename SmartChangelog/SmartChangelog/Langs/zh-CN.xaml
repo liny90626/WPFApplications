@@ -1,0 +1,120 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+    <!-- A -->
+    <sys:String x:Key="add">新增</sys:String>
+    <sys:String x:Key="analyze_svn_log_list_failed">分析SVN日志列表失败!</sys:String>
+    <sys:String x:Key="app_name">Smart Changelog</sys:String>
+    <sys:String x:Key="are_you_sure_to_finish_this_job">确认都处理好了么?</sys:String>
+    <sys:String x:Key="author">提交者</sys:String>
+
+    <!-- B -->
+    <sys:String x:Key="back">回退</sys:String>
+    <sys:String x:Key="basic">基础</sys:String>
+    <sys:String x:Key="basic_settings">基础设置</sys:String>
+    <sys:String x:Key="browser">浏览</sys:String>
+
+    <!-- C -->
+    <sys:String x:Key="cancel">取消</sys:String>
+    <sys:String x:Key="changelog">更新日志</sys:String>
+    <sys:String x:Key="config">配置</sys:String>
+    <sys:String x:Key="confirm">确认</sys:String>
+
+    <!-- D -->
+    <sys:String x:Key="do_nothing_please_check">未处理任何动作, 请检查配置是否都填写正确!</sys:String>
+
+    <!-- E -->
+    <sys:String x:Key="error">错误</sys:String>
+    <sys:String x:Key="experiment_settings">实验室</sys:String>
+    
+    <!-- F -->
+    <sys:String x:Key="file_name">文件名</sys:String>
+    <sys:String x:Key="finish">完成</sys:String>
+    <sys:String x:Key="fix">修复</sys:String>
+
+    <!-- G -->
+    <sys:String x:Key="get_svn_branch_list_failed">获取SVN分支列表失败!</sys:String>
+    <sys:String x:Key="get_svn_log_list_failed">获取SVN日志列表失败!</sys:String>
+    <sys:String x:Key="git_branch_name">Git分支名称</sys:String>
+    <sys:String x:Key="git_branch_name_tips">eg. master</sys:String>
+    <sys:String x:Key="git_current_version">当前打包对应版本</sys:String>
+    <sys:String x:Key="git_current_version_tips">eg. c9635ca93b22f5c5198f39acaa254eba5b892c7c</sys:String>
+    <sys:String x:Key="git_last_version">上次打包对应版本</sys:String>
+    <sys:String x:Key="git_last_version_tips">eg. 1631f070714527177f5a3820e94d39ce952eb95c</sys:String>
+    <sys:String x:Key="git_log_export_info">Git日志导出所需信息（暂不支持）</sys:String>
+    <sys:String x:Key="git_log_fetching">Git日志获取中...</sys:String>
+    <sys:String x:Key="git_repository_name">Git仓库名称</sys:String>
+    <sys:String x:Key="git_repository_name_tips">eg. sdk_lollipop.git</sys:String>
+    <sys:String x:Key="git_server_addr">Git服务器地址</sys:String>
+    
+    <!-- L -->
+    <sys:String x:Key="load">加载</sys:String>
+    <sys:String x:Key="loaded">加载完成</sys:String>
+    <sys:String x:Key="loading">加载中...</sys:String>
+
+    <!-- N -->
+    <sys:String x:Key="next">下一步</sys:String>
+    <sys:String x:Key="no_record">不记录</sys:String>
+
+    <!-- O -->
+    <sys:String x:Key="oem">定制</sys:String>
+    <sys:String x:Key="ok">确定</sys:String>
+    <sys:String x:Key="optimize">优化</sys:String>
+    <sys:String x:Key="original_content">原始内容</sys:String>
+
+    <!-- P -->
+    <sys:String x:Key="parse_event">解析事件</sys:String>
+    <sys:String x:Key="parse_content">解析内容</sys:String>
+    <sys:String x:Key="parse_type">解析类型</sys:String>
+    <sys:String x:Key="please_format_your_commit">请以下列表中的同学规范自己的提交格式</sys:String>
+    <sys:String x:Key="please_input_the_git_server_addr">请在此输入Git服务器地址</sys:String>
+    <sys:String x:Key="please_input_the_svn_server_addr">请在此输入Svn服务器地址</sys:String>
+    <sys:String x:Key="prev">上一步</sys:String>
+    
+    <!-- R -->
+    <sys:String x:Key="reason">原因</sys:String>
+    <sys:String x:Key="regx_svn_settings">Svn正则表达式</sys:String>
+    <sys:String x:Key="reporting">报告生成中...</sys:String>
+    <sys:String x:Key="reset">重新开始</sys:String>
+    <sys:String x:Key="revision">版本号</sys:String>
+
+    <!-- S -->
+    <sys:String x:Key="save">保存</sys:String>
+    <sys:String x:Key="saved">保存完成</sys:String>
+    <sys:String x:Key="saving">保存中...</sys:String>
+    <sys:String x:Key="settings">配置</sys:String>
+    <sys:String x:Key="state_machine_error">状态机错误</sys:String>
+    <sys:String x:Key="start">开始</sys:String>
+    <sys:String x:Key="svn_branch_name">Svn分支名称</sys:String>
+    <sys:String x:Key="svn_branch_name_tips">eg. r52-v6.0</sys:String>
+    <sys:String x:Key="svn_current_version">当前打包对应版本</sys:String>
+    <sys:String x:Key="svn_current_version_tips">eg. 36100</sys:String>
+    <sys:String x:Key="svn_last_version">上次打包对应版本</sys:String>
+    <sys:String x:Key="svn_last_version_tips">eg. 36000</sys:String>
+    <sys:String x:Key="svn_log_analyzing">Svn日志分析中...</sys:String>
+    <sys:String x:Key="svn_log_fetching">Svn日志获取中...</sys:String>
+    <sys:String x:Key="svn_log_export_info">Svn日志导出所需信息</sys:String>
+    <sys:String x:Key="svn_regx_add">正则规则 - 新增</sys:String>
+    <sys:String x:Key="svn_regx_back">正则规则 - 回退</sys:String>
+    <sys:String x:Key="svn_regx_content">正则规则 - 内容</sys:String>
+    <sys:String x:Key="svn_regx_eventid">正则规则 - 事件</sys:String>
+    <sys:String x:Key="svn_regx_fix">正则规则 - 修复</sys:String>
+    <sys:String x:Key="svn_regx_optimize">正则规则 - 优化</sys:String>
+    <sys:String x:Key="svn_regx_oem">正则规则 - 定制</sys:String>
+    <sys:String x:Key="svn_server_addr">Svn服务器地址</sys:String>
+
+    <!-- T -->
+    <sys:String x:Key="tips">提示</sys:String>
+
+    <!-- V -->
+    <sys:String x:Key="unknown">未知</sys:String>
+    
+    <!-- V -->
+    <sys:String x:Key="version">版本号</sys:String>
+    <sys:String x:Key="version_is_unknown">版本号未知</sys:String>
+
+    <!-- W -->
+    <sys:String x:Key="warning">警告</sys:String>
+    <sys:String x:Key="will_enter_reporting">即将生成报告</sys:String>
+    
+</ResourceDictionary>

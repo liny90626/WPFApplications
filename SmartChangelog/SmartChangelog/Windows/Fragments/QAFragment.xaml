@@ -1,0 +1,29 @@
+﻿<UserControl x:Class="SmartChangelog.Windows.Fragments.QAFragment"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+             mc:Ignorable="d" Width="400" Height="400" Margin="20" Loaded="UserControl_Loaded">
+    <StackPanel VerticalAlignment="Top" HorizontalAlignment="Center">
+        <StackPanel Width="400" Height="200" Orientation="Horizontal">
+            <StackPanel Width="250" Height="200">
+                <Label Content="{StaticResource parse_event}" Margin="10, 10, 10, 0"/>
+                <TextBox Width="230" Height="30" Name="ChangeEventId" Margin="10, 0, 10, 0" AcceptsReturn="True" TextWrapping="Wrap" />
+                <Label Content="{StaticResource parse_content}" Margin="10, 10, 10, 0"/>
+                <TextBox Width="230" Height="90" Name="ChangeContent" Margin="10, 0, 10, 10" AcceptsReturn="True" TextWrapping="Wrap" />
+            </StackPanel>
+            <StackPanel Width="150" Height="200">
+                <Label Content="{StaticResource parse_type}" Margin="10, 10, 10, 0"/>
+                <ComboBox Width="120" Height="30" Name="ChangeType" />
+                <Label Content="{StaticResource author}" Margin="10, 10, 10, 0"/>
+                <TextBlock Width="120" Height="30" Name="ChangeAuthor" />
+                <Label Content="{StaticResource revision}" Margin="10, 10, 10, 0"/>
+                <TextBlock Width="120" Height="30" Name="ChangeRevision" />
+            </StackPanel>
+        </StackPanel>
+        <TextBox Height="150" Name="LogContent" Margin="10, 10, 10, 0" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" IsReadOnly="True" />
+        <Label Name="ListSizeAndIndex" Width="100" Height="20" Margin="10, 10, 10, 10" 
+               VerticalAlignment="Bottom" HorizontalAlignment="Right" HorizontalContentAlignment="Right" FontSize="10" FontWeight="Bold" />
+    </StackPanel>
+</UserControl>

@@ -1,0 +1,86 @@
+﻿<Controls:MetroWindow x:Class="SmartChangelog.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        Title="{StaticResource app_name}" Width="640" Height="480" TitleCharacterCasing="Normal" ResizeMode="NoResize" Loaded="MetroWindow_Loaded">
+    <Controls:MetroWindow.Flyouts>
+        <Controls:FlyoutsControl>
+            <Controls:Flyout Name="ConfigFlyout" Width="395" Position="Right">
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <StackPanel VerticalAlignment="Top" HorizontalAlignment="Left">
+                        <Expander Header="{StaticResource basic_settings}" IsExpanded="True" Width="395" BorderThickness="0">
+                            <StackPanel VerticalAlignment="Top" HorizontalAlignment="Left">
+                                <Label Margin="10, 10, 10, 0" Content="{StaticResource svn_server_addr}"/>
+                                <TextBox Name="ConfigSvnServer" Width="350" Height="30" Margin="10, 0, 10, 0" FontSize="10"
+                                         Controls:TextBoxHelper.Watermark="{StaticResource please_input_the_svn_server_addr}"
+                                         Controls:TextBoxHelper.ClearTextButton="True"
+                                         VerticalContentAlignment="Center" TextChanged="ConfigSvnServer_TextChanged" />
+                                <Label Margin="10, 10, 10, 0" Content="{StaticResource git_server_addr}"/>
+                                <TextBox Name="ConfigGitServer" Width="350" Height="30" Margin="10, 0, 10, 20" FontSize="10"
+                                         Controls:TextBoxHelper.Watermark="{StaticResource please_input_the_git_server_addr}"
+                                         Controls:TextBoxHelper.ClearTextButton="True"
+                                         VerticalContentAlignment="Center" TextChanged="ConfigGitServer_TextChanged" />
+                            </StackPanel>
+                        </Expander>
+                        <Expander Header="{StaticResource regx_svn_settings}" IsExpanded="False" Width="395" BorderThickness="0">
+                            <StackPanel VerticalAlignment="Top" HorizontalAlignment="Left">
+                                <Label Margin="10, 10, 10, 0" Content="{StaticResource svn_regx_eventid}"/>
+                                <TextBox Name="ConfigSvnRegxEventId" Width="350" Height="100" Margin="10, 0, 10, 0" FontSize="10"
+                                         VerticalContentAlignment="Top" VerticalScrollBarVisibility="Auto" 
+                                         TextWrapping="Wrap" AcceptsReturn="True" TextChanged="ConfigSvnRegxEventId_TextChanged" />
+                                <Label Margin="10, 10, 10, 0" Content="{StaticResource svn_regx_content}"/>
+                                <TextBox Name="ConfigSvnRegxContent" Width="350" Height="100" Margin="10, 0, 10, 0" FontSize="10"
+                                         VerticalContentAlignment="Top" VerticalScrollBarVisibility="Auto" 
+                                         TextWrapping="Wrap" AcceptsReturn="True" TextChanged="ConfigSvnRegxContent_TextChanged" />
+                                <Label Margin="10, 10, 10, 0" Content="{StaticResource svn_regx_add}"/>
+                                <TextBox Name="ConfigSvnRegxAdd" Width="350" Height="100" Margin="10, 0, 10, 0" FontSize="10"
+                                         VerticalContentAlignment="Top" VerticalScrollBarVisibility="Auto" 
+                                         TextWrapping="Wrap" AcceptsReturn="True"
+                                         TextChanged="ConfigSvnRegxAdd_TextChanged" />
+                                <Label Margin="10, 10, 10, 0" Content="{StaticResource svn_regx_back}"/>
+                                <TextBox Name="ConfigSvnRegxBack" Width="350" Height="100" Margin="10, 0, 10, 0" FontSize="10"
+                                         VerticalContentAlignment="Top" VerticalScrollBarVisibility="Auto"
+                                         TextWrapping="Wrap" AcceptsReturn="True"
+                                         TextChanged="ConfigSvnRegxBack_TextChanged" />
+                                <Label Margin="10, 10, 10, 0" Content="{StaticResource svn_regx_optimize}"/>
+                                <TextBox Name="ConfigSvnRegxOptimize" Width="350" Height="100" Margin="10, 0, 10, 0" FontSize="10"
+                                         VerticalContentAlignment="Top" VerticalScrollBarVisibility="Auto" 
+                                         TextWrapping="Wrap" AcceptsReturn="True"
+                                         TextChanged="ConfigSvnRegxOptimize_TextChanged" />
+                                <Label Margin="10, 10, 10, 0" Content="{StaticResource svn_regx_fix}"/>
+                                <TextBox Name="ConfigSvnRegxFix" Width="350" Height="100" Margin="10, 0, 10, 0" FontSize="10"
+                                         VerticalContentAlignment="Top" VerticalScrollBarVisibility="Auto" 
+                                         TextWrapping="Wrap" AcceptsReturn="True"
+                                         TextChanged="ConfigSvnRegxFix_TextChanged" />
+                                <Label Margin="10, 10, 10, 0" Content="{StaticResource svn_regx_oem}"/>
+                                <TextBox Name="ConfigSvnRegxOem" Width="350" Height="100" Margin="10, 0, 10, 20" FontSize="10"
+                                         VerticalContentAlignment="Top" VerticalScrollBarVisibility="Auto" 
+                                         TextWrapping="Wrap" AcceptsReturn="True"
+                                         TextChanged="ConfigSvnRegxOem_TextChanged" />
+                            </StackPanel>
+                        </Expander>
+                        <Expander Header="{StaticResource experiment_settings}" IsExpanded="False" Width="395" BorderThickness="0">
+                        </Expander>
+                    </StackPanel>
+                </ScrollViewer>
+            </Controls:Flyout>
+        </Controls:FlyoutsControl>
+    </Controls:MetroWindow.Flyouts>
+    <Controls:MetroWindow.RightWindowCommands>
+        <Controls:WindowCommands>
+            <ToggleButton Content="{StaticResource settings}" IsChecked="{Binding ElementName=ConfigFlyout, Path=IsOpen}" Cursor="Hand"/>
+        </Controls:WindowCommands>
+    </Controls:MetroWindow.RightWindowCommands>
+    <StackPanel Width="600" Height="450" HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal" Margin="10">
+        <StackPanel Width="450" Height="450" HorizontalAlignment="Left" VerticalAlignment="Center">
+            <ContentControl Name="MainContent" />
+        </StackPanel>
+        <StackPanel Width="150" Height="450" HorizontalAlignment="Right" VerticalAlignment="Center" Orientation="Vertical">
+            <Button Name="NextBtn" Width="100" Height="30" HorizontalAlignment="Center" Margin="10, 20, 10, 10" Content="{StaticResource next}" Click="NextBtn_Click" />
+            <Button Name="PrevBtn" Width="100" Height="30" HorizontalAlignment="Center" Margin="10" Content="{StaticResource prev}" Click="PrevBtn_Click" />
+            <Button Name="ResetBtn" Width="100" Height="30" HorizontalAlignment="Center" Margin="10" Content="{StaticResource reset}" Click="ResetBtn_Click" />
+            <Label Height="250" Width="150" Name="VersionLabel" Content="{StaticResource version_is_unknown}" 
+                    HorizontalContentAlignment="Right" FontWeight="Bold" VerticalContentAlignment="Bottom" FontSize="10" HorizontalAlignment="Right" />
+        </StackPanel>
+    </StackPanel>
+</Controls:MetroWindow>
