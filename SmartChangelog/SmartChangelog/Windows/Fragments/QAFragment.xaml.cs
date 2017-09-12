@@ -58,6 +58,9 @@ namespace SmartChangelog.Windows.Fragments
         {
             mSvnChangelog = svnChangelog;
             mGitChangelog = gitChangelog;
+
+            // 设置数据, 索引归零
+            mDataIndex = 0;
         }
 
         public void GetData(out Changelog svnChangelog, out Changelog gitChangelog)
@@ -109,7 +112,7 @@ namespace SmartChangelog.Windows.Fragments
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
             List<string> changeTypes = new List<string>();
-            changeTypes.Add((string)mWin.FindResource("no_record"));    // unknown对应不记录
+            changeTypes.Add((string)mWin.FindResource("others"));    // unknown对应其他
             changeTypes.Add((string)mWin.FindResource("add"));
             changeTypes.Add((string)mWin.FindResource("back"));
             changeTypes.Add((string)mWin.FindResource("optimize"));

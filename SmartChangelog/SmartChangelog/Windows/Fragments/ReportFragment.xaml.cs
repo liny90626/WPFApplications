@@ -60,6 +60,17 @@ namespace SmartChangelog.Windows.Fragments
             mBlameChangelog = GenerateBlame(svnChangelog, gitChangelog);
         }
 
+        public void GetData(out Changelog allChangelog)
+        {
+            allChangelog = mAllChangelog;
+        }
+
+        public void GetData(out Changelog svnChangelog, out Changelog gitChangelog)
+        {
+            svnChangelog = mSvnChangelog;
+            gitChangelog = mGitChangelog;
+        }
+
         public void GetData(out Changelog allChangelog, out Changelog svnChangelog, out Changelog gitChangelog)
         {
             allChangelog = mAllChangelog;
@@ -141,6 +152,21 @@ namespace SmartChangelog.Windows.Fragments
                 content += mWin.FindResource("back") 
                     + ":" + Environment.NewLine
                     + GenerateSubReport(allChangelog.backList);
+            }
+
+            
+            // 其他
+            if (0 < allChangelog.unkownList.Count)
+            {
+                if (!isFirstLine)
+                {
+                    content += Environment.NewLine;
+                }
+                isFirstLine = false;
+
+                content += mWin.FindResource("others")
+                    + ":" + Environment.NewLine
+                    + GenerateSubReport(allChangelog.unkownList);
             }
 
             return content;

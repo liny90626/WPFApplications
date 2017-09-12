@@ -19,8 +19,12 @@ namespace SmartChangelog.Controls
 
         private Task mLoadTask = null;
         private CancellationTokenSource mLoadCts = null;
+
         private Task mReportTask = null;
         private CancellationTokenSource mReportCts = null;
+
+        private Task mLearnTask = null;
+        private CancellationTokenSource mLearnCts = null;
 
         public MainControl(MainWindow win)
         {
@@ -67,6 +71,26 @@ namespace SmartChangelog.Controls
                 mReportCts.Cancel();
                 mReportCts = null;
                 mReportTask = null;
+            }
+        }
+
+        public void LearnDataAsync(Changelog svnChangelog, Changelog gitChangelog)
+        {
+            // 停止上一次任务(若存在)
+            StopLearnTask();
+
+            mLearnCts = new CancellationTokenSource();
+            mLearnTask = new Task(() => LearnData(mLearnCts.Token, svnChangelog, gitChangelog), mLearnCts.Token);
+            mLearnTask.Start();
+        }
+
+        public void StopLearnTask()
+        {
+            if (null != mLearnCts)
+            {
+                mLearnCts.Cancel();
+                mLearnCts = null;
+                mLearnTask = null;
             }
         }
 
@@ -199,7 +223,34 @@ namespace SmartChangelog.Controls
                     allChangelog.oemList, Constant.ChangeType.Oem);
             }
 
+            // 其他
+            if (null != svnChangelog)
+            {
+                GenerateReportChangelog(svnChangelog.unkownList,
+                    allChangelog.unkownList, Constant.ChangeType.Unknown);
+            }
+            if (null != gitChangelog)
+            {
+                GenerateReportChangelog(gitChangelog.unkownList,
+                    allChangelog.unkownList, Constant.ChangeType.Unknown);
+            }
+
             NotifyReportFinished(true, null, allChangelog, svnChangelog, gitChangelog);
+        }
+
+        private void LearnData(CancellationToken ct, Changelog svnChangelog, Changelog gitChangelog)
+        {
+            ReportProgress((string)mWin.FindResource("learning"));
+            
+            // 训练Svn神经网络
+            LearnStatistics svnStatistics = null;
+            mSvnC.LearnData(svnChangelog, out svnStatistics);
+
+            // 训练Git神经网络
+            LearnStatistics gitStatistics = null;
+            mGitC.LearnData(gitChangelog, out gitStatistics);
+
+            NotifyLearnFinished(true, null, svnStatistics, gitStatistics);
         }
 
         private bool IsSvnReady(Dictionary<Constant.DictName, string> dict)
@@ -254,6 +305,13 @@ namespace SmartChangelog.Controls
         {
             StopReportTask();
             mWin.NotifyReportFinishedAsync(success, err, allChangelog, svnChangelog, gitChangelog);
+        }
+
+        private void NotifyLearnFinished(bool success, string err, 
+            LearnStatistics svnStatistics, LearnStatistics gitStatistics)
+        {
+            StopLearnTask();
+            mWin.NotifyLearnFinishedAsync(success, err, svnStatistics, gitStatistics);
         }
     }
 }

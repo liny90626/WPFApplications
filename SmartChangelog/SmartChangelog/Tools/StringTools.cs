@@ -17,7 +17,7 @@ namespace SmartChangelog.Tools
 
         public static string TrimStringWithMergeInfo(string str)
         {
-            string tmp = Regex.Replace(str, "(?:CommitType).*[\\-]{64,}", "", 
+            string tmp = Regex.Replace(str, "(?:CommitType: 分支合并).*?[\\-]{64,}", "", 
                 RegexOptions.Singleline | RegexOptions.IgnoreCase).Trim();
             return tmp;
         }

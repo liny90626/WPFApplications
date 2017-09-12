@@ -60,6 +60,14 @@
                             </StackPanel>
                         </Expander>
                         <Expander Header="{StaticResource experiment_settings}" IsExpanded="False" Width="395" BorderThickness="0">
+                            <StackPanel VerticalAlignment="Top" HorizontalAlignment="Left">
+                                <CheckBox Name="ConfigRegxEnable" Width="350" Margin="10" FontSize="12" 
+                                          Content="{StaticResource regx_enable}" Click="ConfigRegxEnable_Click" />
+                                <CheckBox Name="ConfigAiLearningEnable" Width="350" Margin="10" FontSize="12" 
+                                          Content="{StaticResource ai_learning_enable}" Click="ConfigAiLearningEnable_Click" />
+                                <CheckBox Name="ConfigAiDecisionChangeTypeEnable" Width="350" Margin="10" FontSize="12" 
+                                          Content="{StaticResource ai_decision_change_type_enable}" Click="ConfigAiDecisionChangeTypeEnable_Click" />
+                            </StackPanel>
                         </Expander>
                     </StackPanel>
                 </ScrollViewer>

@@ -35,6 +35,7 @@ namespace SmartChangelog
         private LoadingFragment mLoadingF = null;
         private QAFragment mQAF = null;
         private ReportFragment mReportF = null;
+        private LearnedFragment mLearnedF = null;
 
         /* State Machine */
         private Constant.UiState mUiState = Constant.UiState.Idle;
@@ -63,22 +64,45 @@ namespace SmartChangelog
             mLoadingF = new LoadingFragment(this);
             mQAF = new QAFragment(this);
             mReportF = new ReportFragment(this);
+            mLearnedF = new LearnedFragment(this);
         }
 
         private void ShowState()
         {
             switch (mUiState)
             {
+                case Constant.UiState.Learned:
+                    {
+                        // Fragments
+                        mIdleF.DisableAll();
+                        mQAF.DisableAll();
+                        mReportF.DisableAll();
+                        mLearnedF.EnableAll();
+                        this.MainContent.Content = mLearnedF;
+
+                        // Window-Self
+                        this.NextBtn.IsEnabled = false;
+                        this.NextBtn.Content = (string)FindResource("learn_finished");
+
+                        this.PrevBtn.IsEnabled = false;
+                        this.PrevBtn.Content = (string)FindResource("learn_again");
+
+                        this.ResetBtn.IsEnabled = true;
+                    }
+                    break;
+
                 case Constant.UiState.Report:
                     {
                         // Fragments
                         mIdleF.DisableAll();
                         mQAF.DisableAll();
                         mReportF.EnableAll();
+                        mLearnedF.DisableAll();
                         this.MainContent.Content = mReportF;
 
-                        this.NextBtn.IsEnabled = false;
-                        this.NextBtn.Content = (string)FindResource("next");
+                        // Window-Self
+                        this.NextBtn.IsEnabled = true;
+                        this.NextBtn.Content = (string)FindResource("learn");
 
                         this.PrevBtn.IsEnabled = false;
                         this.PrevBtn.Content = (string)FindResource("prev");
@@ -93,6 +117,7 @@ namespace SmartChangelog
                         mIdleF.DisableAll();
                         mQAF.EnableAll();
                         mReportF.DisableAll();
+                        mLearnedF.DisableAll();
                         this.MainContent.Content = mQAF;
 
                         // Window-Self
@@ -125,6 +150,7 @@ namespace SmartChangelog
                     }
                     break;
 
+                case Constant.UiState.Learning:
                 case Constant.UiState.Reporting:
                 case Constant.UiState.Loading:
                     {
@@ -132,6 +158,7 @@ namespace SmartChangelog
                         mIdleF.DisableAll();
                         mQAF.DisableAll();
                         mReportF.DisableAll();
+                        mLearnedF.DisableAll();
                         this.MainContent.Content = mLoadingF;
 
                         // Window-Self
@@ -151,6 +178,7 @@ namespace SmartChangelog
                         mIdleF.EnableAll();
                         mQAF.DisableAll();
                         mReportF.DisableAll();
+                        mLearnedF.DisableAll();
                         this.MainContent.Content = mIdleF;
 
                         // Window-Self
@@ -171,6 +199,7 @@ namespace SmartChangelog
                         mIdleF.EnableAll();
                         mQAF.DisableAll();
                         mReportF.DisableAll();
+                        mLearnedF.DisableAll();
                         this.MainContent.Content = mIdleF;
 
                         // Window-Self
@@ -190,6 +219,8 @@ namespace SmartChangelog
         {
             switch (mUiState)
             {
+                case Constant.UiState.Learning:
+                case Constant.UiState.Reporting:
                 case Constant.UiState.Loading:
                     mLoadingF.ShowProgress(state);
                     break;
@@ -265,13 +296,41 @@ namespace SmartChangelog
             ShowState();
         }
 
+        private void NotifyLearnFinished(bool success, string err, 
+            LearnStatistics svnStatistics, LearnStatistics gitStatistics)
+        {
+            switch (mUiState)
+            {
+                case Constant.UiState.Learning:
+                    {
+                        if (success)
+                        {
+                            mUiState = Constant.UiState.Learned;
+                            mLearnedF.SetData(svnStatistics, gitStatistics);
+                        }
+                        else
+                        {
+                            ShowErrorMessage(err);
+                            mUiState = Constant.UiState.IdleReady;
+                        }
+                    }
+                    break;
+
+                default:
+                    // 非法的状态
+                    return;
+            }
+
+            ShowState();
+        }
+
         private void MetroWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            // Basic Settings
+            // 基础设置
             this.ConfigSvnServer.Text = ConfigurationManager.AppSettings[Constant.Cfg.SvnServerAddr];
             this.ConfigGitServer.Text = ConfigurationManager.AppSettings[Constant.Cfg.GitServerAddr];
 
-            // Regx Svn Settings
+            // Svn正则设置
             this.ConfigSvnRegxEventId.Text = ConfigurationManager.AppSettings[Constant.Cfg.SvnRegxEventId];
             this.ConfigSvnRegxContent.Text = ConfigurationManager.AppSettings[Constant.Cfg.SvnRegxContent];
 
@@ -280,6 +339,53 @@ namespace SmartChangelog
             this.ConfigSvnRegxOptimize.Text = ConfigurationManager.AppSettings[Constant.Cfg.SvnRegxOptimize];
             this.ConfigSvnRegxFix.Text = ConfigurationManager.AppSettings[Constant.Cfg.SvnRegxFix];
             this.ConfigSvnRegxOem.Text = ConfigurationManager.AppSettings[Constant.Cfg.SvnRegxOem];
+
+            // 实验室
+            try
+            {
+                this.ConfigRegxEnable.IsChecked = bool.Parse(ConfigurationManager.AppSettings[Constant.Cfg.EnableRegx]);
+            }
+            catch (Exception)
+            {
+                // 非法配置时的默认值
+                Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+                config.AppSettings.Settings[Constant.Cfg.EnableRegx].Value = "True";
+                config.Save();
+                ConfigurationManager.RefreshSection(Constant.Cfg.Name);
+
+                this.ConfigRegxEnable.IsChecked = true;
+            }
+
+            try
+            {
+                this.ConfigAiLearningEnable.IsChecked = bool.Parse(ConfigurationManager.AppSettings[Constant.Cfg.EnableAiLearning]);
+            }
+            catch (Exception)
+            {
+                // 非法配置时的默认值
+                Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+                config.AppSettings.Settings[Constant.Cfg.EnableAiLearning].Value = "True";
+                config.Save();
+                ConfigurationManager.RefreshSection(Constant.Cfg.Name);
+
+                this.ConfigAiLearningEnable.IsChecked = true; // 非法配置时的默认值
+            }
+
+            try
+            {
+                this.ConfigAiDecisionChangeTypeEnable.IsChecked = 
+                    bool.Parse(ConfigurationManager.AppSettings[Constant.Cfg.EnableAiDecisionChangeType]);
+            }
+            catch (Exception)
+            {
+                // 非法配置时的默认值
+                Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+                config.AppSettings.Settings[Constant.Cfg.EnableAiDecisionChangeType].Value = "False";
+                config.Save();
+                ConfigurationManager.RefreshSection(Constant.Cfg.Name);
+
+                this.ConfigAiDecisionChangeTypeEnable.IsChecked = false; // 非法配置时的默认值
+            }
         }
 
         private void ConfigSvnRegxEventId_TextChanged(object sender, TextChangedEventArgs e)
@@ -354,10 +460,52 @@ namespace SmartChangelog
             ConfigurationManager.RefreshSection(Constant.Cfg.Name);
         }
 
+        private void ConfigRegxEnable_Click(object sender, RoutedEventArgs e)
+        {
+            Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+            config.AppSettings.Settings[Constant.Cfg.EnableRegx].Value = ((CheckBox)sender).IsChecked.ToString();
+            config.Save();
+            ConfigurationManager.RefreshSection(Constant.Cfg.Name);
+        }
+
+        private void ConfigAiLearningEnable_Click(object sender, RoutedEventArgs e)
+        {
+            Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+            config.AppSettings.Settings[Constant.Cfg.EnableAiLearning].Value = ((CheckBox)sender).IsChecked.ToString();
+            config.Save();
+            ConfigurationManager.RefreshSection(Constant.Cfg.Name);
+        }
+
+        private void ConfigAiDecisionChangeTypeEnable_Click(object sender, RoutedEventArgs e)
+        {
+            Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+            config.AppSettings.Settings[Constant.Cfg.EnableAiDecisionChangeType].Value = ((CheckBox)sender).IsChecked.ToString();
+            config.Save();
+            ConfigurationManager.RefreshSection(Constant.Cfg.Name);
+        }
+
         private void NextBtn_Click(object sender, RoutedEventArgs e)
         {
             switch (mUiState)
             {
+                case Constant.UiState.Report:
+                    {
+                        // 系统加载时已经处理过非法值了, 这里视为值一定是合法的
+                        // (不考虑运行过程中故意改非法挂掉的情况)
+                        if (!bool.Parse(ConfigurationManager.AppSettings[Constant.Cfg.EnableAiLearning]))
+                        {
+                            ShowTipMessage((string)FindResource("ai_learning_is_not_enable"));
+                            return;
+                        }
+
+                        mUiState = Constant.UiState.Learning;
+                        Changelog svnChangelog = null;
+                        Changelog gitChangelog = null;
+                        mReportF.GetData(out svnChangelog, out gitChangelog);
+                        mMainC.LearnDataAsync(svnChangelog, gitChangelog);
+                    }
+                    break;
+
                 case Constant.UiState.QuestionAndAnswer:
                     {
                         if (mQAF.IsTail())
@@ -437,8 +585,11 @@ namespace SmartChangelog
         {
             switch (mUiState)
             {
+                case Constant.UiState.Learned:
                 case Constant.UiState.Report:
                 case Constant.UiState.QuestionAndAnswer:
+                case Constant.UiState.Learning:
+                case Constant.UiState.Reporting:
                 case Constant.UiState.Loading:
                     {
                         // 停止任务
@@ -532,6 +683,13 @@ namespace SmartChangelog
         {
             this.Dispatcher.BeginInvoke(new Action(()
                 => NotifyReportFinished(success, err, allChangelog, svnChangelog, gitChangelog)));
+        }
+
+        public void NotifyLearnFinishedAsync(bool success, string err,
+            LearnStatistics svnStatistics, LearnStatistics gitStatistics)
+        {
+            this.Dispatcher.BeginInvoke(new Action(()
+                => NotifyLearnFinished(success, err, svnStatistics, gitStatistics)));
         }
     }
 }

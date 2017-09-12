@@ -12,6 +12,9 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+using AForge.Neuro;
+using AForge.Neuro.Learning;
+
 namespace SmartChangelog.Windows.Fragments
 {
     /// <summary>
@@ -156,11 +159,12 @@ namespace SmartChangelog.Windows.Fragments
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
-            // Test
-            this.SvnBranchName.Text = "r52-v6.0";
-            this.SvnLastVersion.Text = "36000";
-            this.SvnCurrentVersion.Text = "36126";
+            /*
+            this.SvnBranchName.Text = "r4x-android-v7.6";
+            this.SvnLastVersion.Text = "27908";
+            this.SvnCurrentVersion.Text = "28193";
             mWin.NotifyIdleFragmentReady(true);
+             */
         }
     }
 }

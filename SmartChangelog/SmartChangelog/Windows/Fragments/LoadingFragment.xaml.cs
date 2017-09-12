@@ -32,10 +32,5 @@ namespace SmartChangelog.Windows.Fragments
         {
             this.LoadingState.Content = state;
         }
-
-        private void UserControl_Loaded(object sender, RoutedEventArgs e)
-        {
-            this.LoadingState.Content = (string)mWin.FindResource("loading");
-        }
     }
 }

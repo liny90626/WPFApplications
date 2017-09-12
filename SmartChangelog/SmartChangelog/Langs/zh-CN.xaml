@@ -2,7 +2,11 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:sys="clr-namespace:System;assembly=mscorlib">
     <!-- A -->
+    <sys:String x:Key="about">大约</sys:String>
     <sys:String x:Key="add">新增</sys:String>
+    <sys:String x:Key="ai_decision_change_type_enable">开启神经网络决策日志类型功能</sys:String>
+    <sys:String x:Key="ai_learning_enable">开启神经网络学习功能</sys:String>
+    <sys:String x:Key="ai_learning_is_not_enable">神经网络学习功能未开启</sys:String>
     <sys:String x:Key="analyze_svn_log_list_failed">分析SVN日志列表失败!</sys:String>
     <sys:String x:Key="app_name">Smart Changelog</sys:String>
     <sys:String x:Key="are_you_sure_to_finish_this_job">确认都处理好了么?</sys:String>
@@ -16,6 +20,7 @@
 
     <!-- C -->
     <sys:String x:Key="cancel">取消</sys:String>
+    <sys:String x:Key="can_not_get_statistics">未获取到统计信息</sys:String>
     <sys:String x:Key="changelog">更新日志</sys:String>
     <sys:String x:Key="config">配置</sys:String>
     <sys:String x:Key="confirm">确认</sys:String>
@@ -41,13 +46,18 @@
     <sys:String x:Key="git_current_version_tips">eg. c9635ca93b22f5c5198f39acaa254eba5b892c7c</sys:String>
     <sys:String x:Key="git_last_version">上次打包对应版本</sys:String>
     <sys:String x:Key="git_last_version_tips">eg. 1631f070714527177f5a3820e94d39ce952eb95c</sys:String>
+    <sys:String x:Key="git_learn_statistics">Git神经网络学习情况</sys:String>
     <sys:String x:Key="git_log_export_info">Git日志导出所需信息（暂不支持）</sys:String>
     <sys:String x:Key="git_log_fetching">Git日志获取中...</sys:String>
     <sys:String x:Key="git_repository_name">Git仓库名称</sys:String>
     <sys:String x:Key="git_repository_name_tips">eg. sdk_lollipop.git</sys:String>
     <sys:String x:Key="git_server_addr">Git服务器地址</sys:String>
-    
+
     <!-- L -->
+    <sys:String x:Key="learn">学习</sys:String>
+    <sys:String x:Key="learning">学习中...</sys:String>
+    <sys:String x:Key="learn_again">再学一次</sys:String>
+    <sys:String x:Key="learn_finished">学习完毕</sys:String>
     <sys:String x:Key="load">加载</sys:String>
     <sys:String x:Key="loaded">加载完成</sys:String>
     <sys:String x:Key="loading">加载中...</sys:String>
@@ -61,18 +71,20 @@
     <sys:String x:Key="ok">确定</sys:String>
     <sys:String x:Key="optimize">优化</sys:String>
     <sys:String x:Key="original_content">原始内容</sys:String>
+    <sys:String x:Key="others">其他</sys:String>
 
     <!-- P -->
     <sys:String x:Key="parse_event">解析事件</sys:String>
     <sys:String x:Key="parse_content">解析内容</sys:String>
     <sys:String x:Key="parse_type">解析类型</sys:String>
-    <sys:String x:Key="please_format_your_commit">请以下列表中的同学规范自己的提交格式</sys:String>
+    <sys:String x:Key="please_format_your_commit">请注意, 以下列表中的提交未被很好地识别</sys:String>
     <sys:String x:Key="please_input_the_git_server_addr">请在此输入Git服务器地址</sys:String>
     <sys:String x:Key="please_input_the_svn_server_addr">请在此输入Svn服务器地址</sys:String>
     <sys:String x:Key="prev">上一步</sys:String>
     
     <!-- R -->
     <sys:String x:Key="reason">原因</sys:String>
+    <sys:String x:Key="regx_enable">开启正则匹配功能</sys:String>
     <sys:String x:Key="regx_svn_settings">Svn正则表达式</sys:String>
     <sys:String x:Key="reporting">报告生成中...</sys:String>
     <sys:String x:Key="reset">重新开始</sys:String>
@@ -85,12 +97,15 @@
     <sys:String x:Key="settings">配置</sys:String>
     <sys:String x:Key="state_machine_error">状态机错误</sys:String>
     <sys:String x:Key="start">开始</sys:String>
+    <sys:String x:Key="statistics_changetype_accuracy">日志类型 - 学习准确度</sys:String>
+    <sys:String x:Key="statistics_changetype_cnt">日志类型 - 学习次数</sys:String>
     <sys:String x:Key="svn_branch_name">Svn分支名称</sys:String>
     <sys:String x:Key="svn_branch_name_tips">eg. r52-v6.0</sys:String>
     <sys:String x:Key="svn_current_version">当前打包对应版本</sys:String>
     <sys:String x:Key="svn_current_version_tips">eg. 36100</sys:String>
     <sys:String x:Key="svn_last_version">上次打包对应版本</sys:String>
     <sys:String x:Key="svn_last_version_tips">eg. 36000</sys:String>
+    <sys:String x:Key="svn_learn_statistics">Svn神经网络学习情况</sys:String>
     <sys:String x:Key="svn_log_analyzing">Svn日志分析中...</sys:String>
     <sys:String x:Key="svn_log_fetching">Svn日志获取中...</sys:String>
     <sys:String x:Key="svn_log_export_info">Svn日志导出所需信息</sys:String>
@@ -106,9 +121,11 @@
     <!-- T -->
     <sys:String x:Key="tips">提示</sys:String>
 
-    <!-- V -->
+    <!-- U -->
+    <sys:String x:Key="unit_times">次</sys:String>
     <sys:String x:Key="unknown">未知</sys:String>
-    
+    <sys:String x:Key="unsupport">暂不支持</sys:String>
+
     <!-- V -->
     <sys:String x:Key="version">版本号</sys:String>
     <sys:String x:Key="version_is_unknown">版本号未知</sys:String>
