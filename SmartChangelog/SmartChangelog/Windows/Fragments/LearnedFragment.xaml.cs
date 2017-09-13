@@ -57,7 +57,7 @@ namespace SmartChangelog.Windows.Fragments
             {
                 this.SvnStatisticsChangeTypeAccuracy.Text = mWin.FindResource("about") +
                     mSvnStatistics.StatisticsChangeTypeAccuracy.ToString("P");
-                this.SvnStatisticsChangeTypeCnt.Text = mWin.FindResource("about") +
+                this.SvnStatisticsChangeTypeCnt.Text =
                     mSvnStatistics.StatisticsChangeTypeCnt.ToString()
                     + mWin.FindResource("unit_times");
             }

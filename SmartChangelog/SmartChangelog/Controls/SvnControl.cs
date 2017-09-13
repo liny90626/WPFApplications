@@ -202,7 +202,7 @@ namespace SmartChangelog.Controls
                 statistics.StatisticsChangeTypeAccuracy = accuracy;
                 SaveCurrentStatistics(statistics);
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 // Ingore
             }
@@ -366,9 +366,9 @@ namespace SmartChangelog.Controls
                 toChange.eventId = fromChange.eventId;
             }
 
-            if (toChange.content.Length < fromChange.content.Length)
+            if (toChange.content.Length > fromChange.content.Length)
             {
-                // 内容用长的, 更详细
+                // 内容用短的, 更精简
                 toChange.content = fromChange.content;
             }
         }

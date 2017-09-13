@@ -159,12 +159,13 @@ namespace SmartChangelog.Windows.Fragments
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
-            /*
-            this.SvnBranchName.Text = "r4x-android-v7.6";
-            this.SvnLastVersion.Text = "27908";
-            this.SvnCurrentVersion.Text = "28193";
+#if false
+            // 测试代码
+            this.SvnBranchName.Text = "r52-v6.0";
+            this.SvnLastVersion.Text = "36420";
+            this.SvnCurrentVersion.Text = "36421";
             mWin.NotifyIdleFragmentReady(true);
-             */
+#endif
         }
     }
 }
