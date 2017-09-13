@@ -99,6 +99,17 @@ namespace SmartChangelog.Windows.Fragments
             ShowData();
         }
 
+        public void SaveCurrentData()
+        {
+            // 当跳转下一个时, 将当前修改保存
+            ChangeItem change = GetCurrentData();
+            change.eventId = StringTools.TrimStringWithSpace(
+                this.ChangeEventId.Text.Trim().ToLower());
+            change.content = StringTools.TrimStringWithEventId(
+                this.ChangeContent.Text.Trim(), change.eventId);
+            change.type = (Constant.ChangeType)this.ChangeType.SelectedIndex;
+        }
+
         public bool IsHead()
         {
             return (mDataIndex == 0);

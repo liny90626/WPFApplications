@@ -518,6 +518,7 @@ namespace SmartChangelog
 
                                 Changelog svnChangelog = null;
                                 Changelog gitChangelog = null;
+                                mQAF.SaveCurrentData();
                                 mQAF.GetData(out svnChangelog, out gitChangelog);
                                 mMainC.ReportDataAsync(svnChangelog, gitChangelog);
                             }
