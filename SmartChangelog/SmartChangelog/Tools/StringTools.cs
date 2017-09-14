@@ -40,6 +40,10 @@ namespace SmartChangelog.Tools
         public static string TrimStringWithEventId(string str, string eventId)
         {
             string number = Regex.Replace(eventId, "[^0-9]", "").Trim();
+            if (string.IsNullOrWhiteSpace(number))
+            {
+                return str;
+            }
             return Regex.Replace(str, "[A-Za-z]{0,}[\\s]{0,}" + number + "[\\s]{0,}", "").Trim();
         }
     }

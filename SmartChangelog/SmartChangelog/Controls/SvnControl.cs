@@ -603,12 +603,18 @@ namespace SmartChangelog.Controls
             double[][] outputData = null;
             BuildTrainChangeTypeData(changelog, out inputData, out outputData);
 
+            long tick = DateTime.Now.Ticks;
+            Random ran = new Random((int)(tick & 0xffffffffL) | (int)(tick >> 32));
+            int minTrainCnt = ran.Next(50, 500);   // 训练次数至少50~500
+
             // 开始训练
             accuracy = 1.0;
             iterations = 0;
+
             PerceptronLearning teacher = new PerceptronLearning(mChangeTypeNetwork);
-            while (accuracy > Constant.Neuro.NeuronsError 
+            while ((accuracy > Constant.Neuro.NeuronsError
                 && iterations < Constant.Neuro.NeuronsMaxIterations)
+                || iterations < minTrainCnt)
             {
                 // teacher.RunEpoch returns absolute error
                 accuracy = teacher.RunEpoch(inputData, outputData);
@@ -741,11 +747,10 @@ namespace SmartChangelog.Controls
                 outputList.Add(BuildChangeTypeOutputDoubles(change.type));
             }
 
-            /*
             // Unknown
             foreach (ChangeItem change in changelog.unkownList)
             {
-                if (Constant.ChangeType.Unknown != change.type)
+                if (Constant.ChangeType.Unknown == change.type)
                 {
                     continue;
                 }
@@ -753,7 +758,6 @@ namespace SmartChangelog.Controls
                 inputList.Add(BuildInputDoubles(change.log.content.ToArray()));
                 outputList.Add(BuildChangeTypeOutputDoubles(change.type));
             }
-            */
 
             inputData = inputList.ToArray();
             outputData = outputList.ToArray();

@@ -84,7 +84,8 @@ namespace SmartChangelog
                         this.NextBtn.IsEnabled = false;
                         this.NextBtn.Content = (string)FindResource("learn_finished");
 
-                        this.PrevBtn.IsEnabled = false;
+                        this.PrevBtn.IsEnabled = 
+                            bool.Parse(ConfigurationManager.AppSettings[Constant.Cfg.EnableAiLearning]);
                         this.PrevBtn.Content = (string)FindResource("learn_again");
 
                         this.ResetBtn.IsEnabled = true;
@@ -101,7 +102,8 @@ namespace SmartChangelog
                         this.MainContent.Content = mReportF;
 
                         // Window-Self
-                        this.NextBtn.IsEnabled = true;
+                        this.NextBtn.IsEnabled = 
+                            bool.Parse(ConfigurationManager.AppSettings[Constant.Cfg.EnableAiLearning]);
                         this.NextBtn.Content = (string)FindResource("learn");
 
                         this.PrevBtn.IsEnabled = false;
@@ -560,8 +562,21 @@ namespace SmartChangelog
         {
             switch (mUiState)
             {
-                case Constant.UiState.Report:
-                    { 
+                case Constant.UiState.Learned:
+                    {
+                        // 系统加载时已经处理过非法值了, 这里视为值一定是合法的
+                        // (不考虑运行过程中故意改非法挂掉的情况)
+                        if (!bool.Parse(ConfigurationManager.AppSettings[Constant.Cfg.EnableAiLearning]))
+                        {
+                            ShowTipMessage((string)FindResource("ai_learning_is_not_enable"));
+                            return;
+                        }
+
+                        mUiState = Constant.UiState.Learning;
+                        Changelog svnChangelog = null;
+                        Changelog gitChangelog = null;
+                        mReportF.GetData(out svnChangelog, out gitChangelog);
+                        mMainC.LearnDataAsync(svnChangelog, gitChangelog);
                     }
                     break;
 

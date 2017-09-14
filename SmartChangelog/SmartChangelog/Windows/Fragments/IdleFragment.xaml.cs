@@ -162,8 +162,8 @@ namespace SmartChangelog.Windows.Fragments
 #if false
             // 测试代码
             this.SvnBranchName.Text = "r52-v6.0";
-            this.SvnLastVersion.Text = "36420";
-            this.SvnCurrentVersion.Text = "36421";
+            this.SvnLastVersion.Text = "36000";
+            this.SvnCurrentVersion.Text = "36100";
             mWin.NotifyIdleFragmentReady(true);
 #endif
         }

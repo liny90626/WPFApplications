@@ -67,7 +67,7 @@ namespace SmartChangelog.Definitions
 
         public class Cfg 
         {
-            public const string Name = "AppSettings";
+            public const string Name = "appSettings";
 
             // 基础设置
             public const string SvnServerAddr = "SvnServerAddr";
