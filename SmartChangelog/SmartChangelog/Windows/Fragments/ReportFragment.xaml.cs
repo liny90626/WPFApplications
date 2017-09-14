@@ -80,12 +80,12 @@ namespace SmartChangelog.Windows.Fragments
 
         private string GenerateReport(Changelog allChangelog)
         {
-            // 优先级为Fix > Add > Optimize > Oem > Back
+            // 优先级为Fix > Add > Optimize > Oem > Back > Others
             string content = "";
             bool isFirstLine = true;
 
             // 修复
-            if (0 < allChangelog.fixList.Count)
+            if (0 <= allChangelog.fixList.Count)
             {
                 if (!isFirstLine)
                 {
@@ -99,7 +99,7 @@ namespace SmartChangelog.Windows.Fragments
             }
 
             // 新增
-            if (0 < allChangelog.addList.Count)
+            if (0 <= allChangelog.addList.Count)
             {
                 if (!isFirstLine) 
                 {
@@ -113,7 +113,7 @@ namespace SmartChangelog.Windows.Fragments
             }
 
             // 优化
-            if (0 < allChangelog.optimizeList.Count)
+            if (0 <= allChangelog.optimizeList.Count)
             {
                 if (!isFirstLine)
                 {
@@ -127,7 +127,7 @@ namespace SmartChangelog.Windows.Fragments
             }
 
             // 定制
-            if (0 < allChangelog.oemList.Count)
+            if (0 <= allChangelog.oemList.Count)
             {
                 if (!isFirstLine)
                 {
@@ -140,7 +140,7 @@ namespace SmartChangelog.Windows.Fragments
                     + GenerateSubReport(allChangelog.oemList);
             }
 
-            // 回退
+            // 回退 - 在没有记录时不显示
             if (0 < allChangelog.backList.Count)
             {
                 if (!isFirstLine)
@@ -154,8 +154,8 @@ namespace SmartChangelog.Windows.Fragments
                     + GenerateSubReport(allChangelog.backList);
             }
 
-            
-            // 其他
+
+            // 其他 - 在没有记录时不显示
             if (0 < allChangelog.unkownList.Count)
             {
                 if (!isFirstLine)
@@ -174,6 +174,11 @@ namespace SmartChangelog.Windows.Fragments
 
         private string GenerateSubReport(List<ChangeItem> list)
         {
+            if (0 == list.Count)
+            {
+                return (string)mWin.FindResource("empty") + Environment.NewLine; ;
+            }
+
             string content = "";
             int index = 1;
             foreach (ChangeItem change in list)

@@ -29,6 +29,7 @@
     <sys:String x:Key="do_nothing_please_check">未处理任何动作, 请检查配置是否都填写正确!</sys:String>
 
     <!-- E -->
+    <sys:String x:Key="empty">无</sys:String>
     <sys:String x:Key="error">错误</sys:String>
     <sys:String x:Key="experiment_settings">实验室</sys:String>
     
@@ -102,7 +103,7 @@
     <sys:String x:Key="svn_branch_name">Svn分支名称</sys:String>
     <sys:String x:Key="svn_branch_name_tips">eg. r52-v6.0</sys:String>
     <sys:String x:Key="svn_current_version">当前打包对应版本</sys:String>
-    <sys:String x:Key="svn_current_version_tips">eg. 36100</sys:String>
+    <sys:String x:Key="svn_current_version_tips">eg. 36100, 输入0表示HEAD</sys:String>
     <sys:String x:Key="svn_last_version">上次打包对应版本</sys:String>
     <sys:String x:Key="svn_last_version_tips">eg. 36000</sys:String>
     <sys:String x:Key="svn_learn_statistics">Svn神经网络学习情况</sys:String>

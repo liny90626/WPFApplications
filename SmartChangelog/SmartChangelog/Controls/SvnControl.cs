@@ -123,7 +123,23 @@ namespace SmartChangelog.Controls
                 bool connect = remoteSession.Open(uri);
                 if (connect)
                 {
-                    remoteSession.Log(branchName, new SvnRevisionRange(startVersion, endVersion),
+                    // 在函数中, startVersion一定小于endVersion
+                    SvnRevision startRevision = 0;
+                    SvnRevision endRevision = 0;
+                    if (0 < startVersion)
+                    {
+                        // 跳过第一个version, 因为这个version在上一次changelog时已经被记录
+                        startRevision = new SvnRevision(startVersion + 1);
+                        endRevision = new SvnRevision(endVersion);
+                    }
+                    else
+                    {
+                        // 表示需要计算endVersion + 1 -> HEAD
+                        startRevision = new SvnRevision(endVersion + 1);
+                        endRevision = new SvnRevision(SvnRevisionType.Head);
+                    }
+
+                    remoteSession.Log(branchName, new SvnRevisionRange(startRevision, endRevision),
                         new EventHandler<SvnRemoteLogEventArgs>(
                             delegate(object s, SvnRemoteLogEventArgs args)
                             {
