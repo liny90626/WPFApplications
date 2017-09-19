@@ -412,6 +412,10 @@ namespace SmartChangelog
             config.AppSettings.Settings[Constant.Cfg.SvnServerAddr].Value = ((TextBox)sender).Text;
             config.Save();
             ConfigurationManager.RefreshSection(Constant.Cfg.Name);
+
+            // 加载列表数据
+            Tools.Utils.DoSvnBranchListLoad(
+                new Action(() => mIdleF.SetSvnBranchList(mMainC.GetSvnBranchList())));
         }
 
         private void ConfigGitServer_TextChanged(object sender, TextChangedEventArgs e)

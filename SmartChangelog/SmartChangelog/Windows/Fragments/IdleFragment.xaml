@@ -10,9 +10,9 @@
             <Expander Header="{StaticResource svn_log_export_info}" IsExpanded="True" Width="400" BorderThickness="0" Background="#CC60A917">
                 <StackPanel Orientation="Vertical">
                     <Label Margin="10, 0, 10, 0" Content="{StaticResource svn_branch_name}" />
-                    <TextBox Name="SvnBranchName" Width="360" Height="30" Margin="10, 0, 10, 0"
+                    <ComboBox Name="SvnBranchName" Width="360" Height="30" Margin="10, 0, 10, 0" IsEditable="True" 
                              Controls:TextBoxHelper.Watermark="{StaticResource svn_branch_name_tips}"
-                             Controls:TextBoxHelper.ClearTextButton="True" TextChanged="SvnBranchName_TextChanged" />
+                             Controls:TextBoxHelper.ClearTextButton="True" TextBoxBase.TextChanged="SvnBranchName_TextChanged" />
                     <Label Margin="10, 10, 10, 0" Content="{StaticResource svn_last_version}" />
                     <TextBox Name="SvnLastVersion" Width="360" Height="30" Margin="10, 0, 10, 0"
                              Controls:TextBoxHelper.Watermark="{StaticResource svn_last_version_tips}"

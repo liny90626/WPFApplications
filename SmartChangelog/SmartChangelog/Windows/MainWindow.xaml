@@ -10,12 +10,12 @@
                     <StackPanel VerticalAlignment="Top" HorizontalAlignment="Left">
                         <Expander Header="{StaticResource basic_settings}" IsExpanded="True" Width="395" BorderThickness="0">
                             <StackPanel VerticalAlignment="Top" HorizontalAlignment="Left">
-                                <Label Margin="10, 10, 10, 0" Content="{StaticResource svn_server_addr}"/>
+                                <Label Margin="10, 10, 10, 0" Content="{StaticResource svn_server_addr}" />
                                 <TextBox Name="ConfigSvnServer" Width="350" Height="30" Margin="10, 0, 10, 0" FontSize="10"
                                          Controls:TextBoxHelper.Watermark="{StaticResource please_input_the_svn_server_addr}"
                                          Controls:TextBoxHelper.ClearTextButton="True"
-                                         VerticalContentAlignment="Center" TextChanged="ConfigSvnServer_TextChanged" />
-                                <Label Margin="10, 10, 10, 0" Content="{StaticResource git_server_addr}"/>
+                                         VerticalContentAlignment="Center" TextChanged="ConfigSvnServer_TextChanged"  />
+                                <Label Margin="10, 10, 10, 0" Content="{StaticResource git_server_addr}" />
                                 <TextBox Name="ConfigGitServer" Width="350" Height="30" Margin="10, 0, 10, 20" FontSize="10"
                                          Controls:TextBoxHelper.Watermark="{StaticResource please_input_the_git_server_addr}"
                                          Controls:TextBoxHelper.ClearTextButton="True"

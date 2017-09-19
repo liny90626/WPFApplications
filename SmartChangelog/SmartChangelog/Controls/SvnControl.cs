@@ -45,8 +45,7 @@ namespace SmartChangelog.Controls
             }
         }
 
-        public List<string> GetSvnBranchList(MainWindow win,
-            string serverUri)
+        public List<string> GetSvnBranchList(string serverUri)
         {
             if (string.IsNullOrWhiteSpace(serverUri))
             {
@@ -81,14 +80,8 @@ namespace SmartChangelog.Controls
                 }
                 return branchList;
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                if (null != win)
-                {
-                    win.ShowErrorMessage(win.FindResource("get_svn_branch_list_failed")
-                        + Environment.NewLine
-                        + win.FindResource("reason") + ": " + e.Message);
-                }
                 return null;
             }
             finally
@@ -181,14 +174,30 @@ namespace SmartChangelog.Controls
             try
             {
                 svnChangelog = new Changelog();
+                long startVersion = -1;
+                long endVersion = -1;
+                long curVersion = 0;
                 foreach (LogItem log in logList)
                 {
+                    curVersion = long.Parse(log.revision);
+                    if (curVersion < startVersion || -1 == startVersion)
+                    {
+                        startVersion = curVersion;
+                    }
+                    if (curVersion > endVersion || -1 == endVersion)
+                    {
+                        endVersion = curVersion;
+                    }
+
                     List<ChangeItem> changeList = Parse(log);
                     if (null != changeList && 0 < changeList.Count)
                     {
                         InsertChangelog(svnChangelog, changeList);
                     }
                 }
+
+                svnChangelog.startVersion = startVersion;
+                svnChangelog.endVersion = endVersion;
             }
             catch (Exception e)
             {

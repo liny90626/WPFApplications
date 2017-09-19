@@ -58,6 +58,16 @@ namespace SmartChangelog.Windows.Fragments
             // 此时还在loading阶段, 顺带准备一下要显示的数据
             mReportChangelog = GenerateReport(allChangelog);
             mBlameChangelog = GenerateBlame(svnChangelog, gitChangelog);
+
+            this.ReportInfo.Content = mWin.FindResource("changelog");
+            if (null != mSvnChangelog)
+            {
+                this.ReportInfo.Content += "(Svn: " + svnChangelog.startVersion + "-" + svnChangelog.endVersion + ")";
+            }
+            if (null != mGitChangelog)
+            {
+                this.ReportInfo.Content += "(Git: " + gitChangelog.startVersion + "-" + gitChangelog.endVersion + ")";
+            }
         }
 
         public void GetData(out Changelog allChangelog)

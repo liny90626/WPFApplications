@@ -151,6 +151,7 @@
     <Compile Include="Definitions\Changelog.cs" />
     <Compile Include="Definitions\LearnStatistics.cs" />
     <Compile Include="Tools\StringTools.cs" />
+    <Compile Include="Tools\Utils.cs" />
     <Compile Include="Windows\Fragments\IdleFragment.xaml.cs">
       <DependentUpon>IdleFragment.xaml</DependentUpon>
     </Compile>

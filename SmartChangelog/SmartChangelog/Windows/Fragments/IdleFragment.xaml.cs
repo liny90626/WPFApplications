@@ -64,9 +64,14 @@ namespace SmartChangelog.Windows.Fragments
             this.GitCurrentVersion.IsEnabled = false;
         }
 
+        public void SetSvnBranchList(List<string> branchList)
+        {
+            this.SvnBranchName.ItemsSource = branchList;
+        }
+
         private void SvnBranchName_TextChanged(object sender, TextChangedEventArgs e)
         {
-            mIsSvnBranchNameReady = !string.IsNullOrWhiteSpace((sender as TextBox).Text);
+            mIsSvnBranchNameReady = !string.IsNullOrWhiteSpace((sender as ComboBox).Text);
             NotifyReady();
         }
 
@@ -167,5 +172,7 @@ namespace SmartChangelog.Windows.Fragments
             mWin.NotifyIdleFragmentReady(true);
 #endif
         }
+
+        
     }
 }

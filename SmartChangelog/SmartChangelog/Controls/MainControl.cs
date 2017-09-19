@@ -34,6 +34,12 @@ namespace SmartChangelog.Controls
             mGitC = new GitControl(win);
         }
 
+        public List<string> GetSvnBranchList()
+        {
+            return mSvnC.GetSvnBranchList(
+                ConfigurationManager.AppSettings[Constant.Cfg.SvnServerAddr]);
+        }
+
         public void LoadDataAsync(Dictionary<Constant.DictName, string> dict)
         {
             // 停止上一次任务(若存在)

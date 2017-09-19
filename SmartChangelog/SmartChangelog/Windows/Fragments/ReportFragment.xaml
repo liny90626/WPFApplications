@@ -7,7 +7,7 @@
              mc:Ignorable="d" Width="400" Height="400" Margin="20" Loaded="UserControl_Loaded">
     <StackPanel VerticalAlignment="Top" HorizontalAlignment="Center">
         <StackPanel Width="400" Height="250" >
-            <Label Content="{StaticResource changelog}" Margin="10, 10, 10, 0"/>
+            <Label Content="{StaticResource changelog}" Margin="10, 10, 10, 0" Name="ReportInfo" />
             <TextBox Height="200" Margin="10, 0, 10, 10" Name="ReportChangelog"
                      TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" />
         </StackPanel>

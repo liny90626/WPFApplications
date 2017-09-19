@@ -25,6 +25,10 @@ namespace SmartChangelog.Definitions
         // 定制
         public List<ChangeItem> oemList { get; set; }
 
+        // 版本记录
+        public long startVersion { get; set; }
+        public long endVersion { get; set; }
+
         public Changelog()
         {
             unkownList = new List<ChangeItem>();
