@@ -8,7 +8,7 @@
     <!-- B -->
     <sys:String x:Key="back">返回</sys:String>
     <sys:String x:Key="bad_parameters">所需参数存在空值!</sys:String>
-    
+
     <!-- C -->
     <sys:String x:Key="changelog">修改记录</sys:String>
     <sys:String x:Key="confirm">确定</sys:String>
@@ -16,10 +16,13 @@
     <!-- E -->
     <sys:String x:Key="excel_col_new_version">新版本号</sys:String>
     <sys:String x:Key="excel_col_old_version">旧版本号</sys:String>
-    <sys:String x:Key="excel_col_device">兼容平台</sys:String>
+    <sys:String x:Key="excel_col_platforms">兼容平台</sys:String>
+    <sys:String x:Key="excel_col_device">机型</sys:String>
     <sys:String x:Key="excel_col_oem">客户OEM</sys:String>
+    <sys:String x:Key="excel_col_oem2">OEM名</sys:String>
     <sys:String x:Key="excel_col_change">对比旧版本的更改</sys:String>
     <sys:String x:Key="excel_col_svn">svn记录</sys:String>
+    <sys:String x:Key="excel_col_svn_branch">分支</sys:String>
     <sys:String x:Key="excel_col_git">git记录</sys:String>
     <sys:String x:Key="excel_col_date">发布时间</sys:String>
     <sys:String x:Key="excel_col_desc">备注</sys:String>

@@ -173,7 +173,8 @@ namespace ChangelogViewer.Windows.Fragments
                 foreach (Worksheet sheet in excel.Worksheets)
                 {
                     // 假设excel中sheet1为实际数据, sheet2为标记数据
-                    if (sheet.Name.Equals("Sheet1", StringComparison.OrdinalIgnoreCase))
+                    if (sheet.Name.Equals("Sheet1", StringComparison.OrdinalIgnoreCase)
+                        || sheet.Name.Equals("版本发布记录", StringComparison.OrdinalIgnoreCase))
                     {
                         ShowLoadingState((string)mWin.FindResource("parsing_file_data"));
                         if (0 != ParseDataSheet(sheet, mChangelogList))
@@ -280,6 +281,10 @@ namespace ChangelogViewer.Windows.Fragments
                             changelog.svnRevision = ParseSvnRevision(text);
                             break;
 
+                        case ColId.SvnBranch:
+                            changelog.svnBranch = text;
+                            break;
+
                         case ColId.Git:
                             changelog.gitAddr = ParseGitAddr(text);
                             changelog.gitBranch = ParseGitBranch(text);
@@ -311,6 +316,19 @@ namespace ChangelogViewer.Windows.Fragments
 
         private int ParseRecordSheet(Worksheet sheet, List<Changelog> changelogList)
         {
+            try
+            {
+                if (sheet.Rows.Count() <= 0)
+                {
+                    return 0;
+                }
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+            
+
             // 这里假设sheet2格式固定, 无标题行, 仅一列, 用于记录已测试的修改记录
             string change = null;
             foreach (CellRange row in sheet.Rows)
@@ -382,13 +400,19 @@ namespace ChangelogViewer.Windows.Fragments
             excelColList.Add(new ExcelCol(ColId.OldVersion, 
                 (string)mWin.FindResource("excel_col_old_version")));
             excelColList.Add(new ExcelCol(ColId.Device, 
+                (string)mWin.FindResource("excel_col_platforms")));
+            excelColList.Add(new ExcelCol(ColId.Device,
                 (string)mWin.FindResource("excel_col_device")));
             excelColList.Add(new ExcelCol(ColId.Oem, 
                 (string)mWin.FindResource("excel_col_oem")));
+            excelColList.Add(new ExcelCol(ColId.Oem,
+                (string)mWin.FindResource("excel_col_oem2")));
             excelColList.Add(new ExcelCol(ColId.Change, 
                 (string)mWin.FindResource("excel_col_change")));
             excelColList.Add(new ExcelCol(ColId.Svn, 
                 (string)mWin.FindResource("excel_col_svn")));
+            excelColList.Add(new ExcelCol(ColId.SvnBranch,
+                (string)mWin.FindResource("excel_col_svn_branch")));
             excelColList.Add(new ExcelCol(ColId.Git, 
                 (string)mWin.FindResource("excel_col_git")));
             excelColList.Add(new ExcelCol(ColId.Date, 
@@ -524,7 +548,14 @@ namespace ChangelogViewer.Windows.Fragments
             string revision = rgx.Match(svn).ToString().Trim();
             if (string.IsNullOrWhiteSpace(revision))
             {
-                return null;
+                rgx = new Regex(@"#([0-9]{1,})", RegexOptions.IgnoreCase);
+                revision = rgx.Match(svn).ToString().Trim();
+                if (string.IsNullOrWhiteSpace(revision))
+                {
+                    return null; 
+                }
+
+                return revision;
             }
 
             return revision.Substring(revision.IndexOf(':') + 1).Trim();
@@ -581,17 +612,30 @@ namespace ChangelogViewer.Windows.Fragments
                 return;
             }
 
+            bool hasSheet2 = false;
             foreach (Worksheet sheet in excel.Worksheets)
             {
                 // 假设excel中sheet1为实际数据, sheet2为标记数据
                 if (sheet.Name.Equals("Sheet2", StringComparison.OrdinalIgnoreCase))
                 {
+                    hasSheet2 = true;
                     ShowLoadingState((string)mWin.FindResource("saving_file_record"));
                     if (0 != SaveRecordSheet(sheet, saveChangelog))
                     {
                         LoadingCompleted(false, (string)mWin.FindResource("save_file_record"));
                         return;
                     }
+                }
+            }
+
+            if (!hasSheet2)
+            {
+                Worksheet sheet = excel.Worksheets.Add("Sheet2");
+                ShowLoadingState((string)mWin.FindResource("saving_file_record"));
+                if (0 != SaveRecordSheet(sheet, saveChangelog))
+                {
+                    LoadingCompleted(false, (string)mWin.FindResource("save_file_record"));
+                    return;
                 }
             }
 
@@ -614,6 +658,18 @@ namespace ChangelogViewer.Windows.Fragments
 
         private int ClearRow(Worksheet sheet, Changelog saveChangelog)
         {
+            try
+            {
+                if (sheet.Rows.Count() <= 0)
+                {
+                    return 0;
+                }
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+
             string change = null;
             foreach (CellRange row in sheet.Rows)
             {
@@ -760,6 +816,23 @@ namespace ChangelogViewer.Windows.Fragments
 
         private int InstertRow(Worksheet sheet, string change)
         {
+            try
+            {
+                if (sheet.Rows.Count() <= 0)
+                {
+                    // 增加到最后一行
+                    sheet.InsertRow(sheet.Rows.Count() + 1);
+                    sheet.Rows.Last().Text = change;
+                    return 0;
+                }
+            }
+            catch (Exception)
+            {
+                // 增加到最后一行
+                sheet.SetText(1, 1, change);
+                return 0;
+            }
+
             string text = null;
             foreach (CellRange row in sheet.Rows)
             {
