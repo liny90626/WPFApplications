@@ -261,6 +261,16 @@ namespace ChangelogViewer.Windows.Fragments
                 {
                     // 递归一级
                     startChangelogSameBranchMax = BuildPickupChangelog(startChangelog, startChangelogSameBranchMax);
+                    pickupChangelog.changeAddList = pickupChangelog.changeAddList
+                    .Union(startChangelogSameBranchMax.changeAddList).ToList<ChangeRecord>();
+                    pickupChangelog.changeFixList = pickupChangelog.changeFixList
+                        .Union(startChangelogSameBranchMax.changeFixList).ToList<ChangeRecord>();
+                    pickupChangelog.changeOptList = pickupChangelog.changeOptList
+                        .Union(startChangelogSameBranchMax.changeOptList).ToList<ChangeRecord>();
+                    pickupChangelog.changeOemList = pickupChangelog.changeOemList
+                        .Union(startChangelogSameBranchMax.changeOemList).ToList<ChangeRecord>();
+                    pickupChangelog.changeOthList = pickupChangelog.changeOthList
+                        .Union(startChangelogSameBranchMax.changeOthList).ToList<ChangeRecord>();
                 }
                 else
                 {
@@ -275,18 +285,18 @@ namespace ChangelogViewer.Windows.Fragments
                 else
                 {
                     endChangelogSameBranchMin = endChangelog;
-
-                    pickupChangelog.changeAddList = pickupChangelog.changeAddList
-                    .Union(endChangelogSameBranchMin.changeAddList).ToList<ChangeRecord>();
-                    pickupChangelog.changeFixList = pickupChangelog.changeFixList
-                        .Union(endChangelogSameBranchMin.changeFixList).ToList<ChangeRecord>();
-                    pickupChangelog.changeOptList = pickupChangelog.changeOptList
-                        .Union(endChangelogSameBranchMin.changeOptList).ToList<ChangeRecord>();
-                    pickupChangelog.changeOemList = pickupChangelog.changeOemList
-                        .Union(endChangelogSameBranchMin.changeOemList).ToList<ChangeRecord>();
-                    pickupChangelog.changeOthList = pickupChangelog.changeOthList
-                        .Union(endChangelogSameBranchMin.changeOthList).ToList<ChangeRecord>();
                 }
+
+                pickupChangelog.changeAddList = pickupChangelog.changeAddList
+                    .Union(endChangelogSameBranchMin.changeAddList).ToList<ChangeRecord>();
+                pickupChangelog.changeFixList = pickupChangelog.changeFixList
+                    .Union(endChangelogSameBranchMin.changeFixList).ToList<ChangeRecord>();
+                pickupChangelog.changeOptList = pickupChangelog.changeOptList
+                    .Union(endChangelogSameBranchMin.changeOptList).ToList<ChangeRecord>();
+                pickupChangelog.changeOemList = pickupChangelog.changeOemList
+                    .Union(endChangelogSameBranchMin.changeOemList).ToList<ChangeRecord>();
+                pickupChangelog.changeOthList = pickupChangelog.changeOthList
+                    .Union(endChangelogSameBranchMin.changeOthList).ToList<ChangeRecord>();
             }
 
             return pickupChangelog;
