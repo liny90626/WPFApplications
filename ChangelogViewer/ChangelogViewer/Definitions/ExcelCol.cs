@@ -13,6 +13,7 @@ namespace ChangelogViewer.Definitions
         Oem,
         Change,
         Svn,
+        SvnBranch,
         Git,
         Date,
         Desc,

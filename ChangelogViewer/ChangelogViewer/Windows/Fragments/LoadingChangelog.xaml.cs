@@ -18,6 +18,7 @@ using System.Text.RegularExpressions;
 using Spire.Xls;
 
 using ChangelogViewer.Definitions;
+using System.Collections;
 
 namespace ChangelogViewer.Windows.Fragments
 {
@@ -34,11 +35,15 @@ namespace ChangelogViewer.Windows.Fragments
         private Task mLoadingTask = null;
         private CancellationTokenSource mCts = null;
 
+        private ChangelogListCompare mListCmp = null;
+
         public LoadingChangelog(MainWindow win)
         {
             InitializeComponent();
 
             mWin = win;
+
+            mListCmp = new ChangelogListCompare();
         }
 
         public int SetData(Object data)
@@ -222,15 +227,15 @@ namespace ChangelogViewer.Windows.Fragments
                     if (IsChangelogNeedRecorded(changelog, startChangelog, endChangelog))
                     {
                         pickupChangelog.changeAddList = pickupChangelog.changeAddList
-                            .Union(changelog.changeAddList).ToList<ChangeRecord>();
+                            .Union(changelog.changeAddList, mListCmp).ToList<ChangeRecord>();
                         pickupChangelog.changeFixList = pickupChangelog.changeFixList
-                            .Union(changelog.changeFixList).ToList<ChangeRecord>();
+                            .Union(changelog.changeFixList, mListCmp).ToList<ChangeRecord>();
                         pickupChangelog.changeOptList = pickupChangelog.changeOptList
-                            .Union(changelog.changeOptList).ToList<ChangeRecord>();
+                            .Union(changelog.changeOptList, mListCmp).ToList<ChangeRecord>();
                         pickupChangelog.changeOemList = pickupChangelog.changeOemList
-                            .Union(changelog.changeOemList).ToList<ChangeRecord>();
+                            .Union(changelog.changeOemList, mListCmp).ToList<ChangeRecord>();
                         pickupChangelog.changeOthList = pickupChangelog.changeOthList
-                            .Union(changelog.changeOthList).ToList<ChangeRecord>();
+                            .Union(changelog.changeOthList, mListCmp).ToList<ChangeRecord>();
                     }
                 }
             }
@@ -262,15 +267,15 @@ namespace ChangelogViewer.Windows.Fragments
                     // 递归一级
                     startChangelogSameBranchMax = BuildPickupChangelog(startChangelog, startChangelogSameBranchMax);
                     pickupChangelog.changeAddList = pickupChangelog.changeAddList
-                    .Union(startChangelogSameBranchMax.changeAddList).ToList<ChangeRecord>();
+                        .Union(startChangelogSameBranchMax.changeAddList, mListCmp).ToList<ChangeRecord>();
                     pickupChangelog.changeFixList = pickupChangelog.changeFixList
-                        .Union(startChangelogSameBranchMax.changeFixList).ToList<ChangeRecord>();
+                        .Union(startChangelogSameBranchMax.changeFixList, mListCmp).ToList<ChangeRecord>();
                     pickupChangelog.changeOptList = pickupChangelog.changeOptList
-                        .Union(startChangelogSameBranchMax.changeOptList).ToList<ChangeRecord>();
+                        .Union(startChangelogSameBranchMax.changeOptList, mListCmp).ToList<ChangeRecord>();
                     pickupChangelog.changeOemList = pickupChangelog.changeOemList
-                        .Union(startChangelogSameBranchMax.changeOemList).ToList<ChangeRecord>();
+                        .Union(startChangelogSameBranchMax.changeOemList, mListCmp).ToList<ChangeRecord>();
                     pickupChangelog.changeOthList = pickupChangelog.changeOthList
-                        .Union(startChangelogSameBranchMax.changeOthList).ToList<ChangeRecord>();
+                        .Union(startChangelogSameBranchMax.changeOthList, mListCmp).ToList<ChangeRecord>();
                 }
                 else
                 {
@@ -288,15 +293,15 @@ namespace ChangelogViewer.Windows.Fragments
                 }
 
                 pickupChangelog.changeAddList = pickupChangelog.changeAddList
-                    .Union(endChangelogSameBranchMin.changeAddList).ToList<ChangeRecord>();
+                    .Union(endChangelogSameBranchMin.changeAddList, mListCmp).ToList<ChangeRecord>();
                 pickupChangelog.changeFixList = pickupChangelog.changeFixList
-                    .Union(endChangelogSameBranchMin.changeFixList).ToList<ChangeRecord>();
+                    .Union(endChangelogSameBranchMin.changeFixList, mListCmp).ToList<ChangeRecord>();
                 pickupChangelog.changeOptList = pickupChangelog.changeOptList
-                    .Union(endChangelogSameBranchMin.changeOptList).ToList<ChangeRecord>();
+                    .Union(endChangelogSameBranchMin.changeOptList, mListCmp).ToList<ChangeRecord>();
                 pickupChangelog.changeOemList = pickupChangelog.changeOemList
-                    .Union(endChangelogSameBranchMin.changeOemList).ToList<ChangeRecord>();
+                    .Union(endChangelogSameBranchMin.changeOemList, mListCmp).ToList<ChangeRecord>();
                 pickupChangelog.changeOthList = pickupChangelog.changeOthList
-                    .Union(endChangelogSameBranchMin.changeOthList).ToList<ChangeRecord>();
+                    .Union(endChangelogSameBranchMin.changeOthList, mListCmp).ToList<ChangeRecord>();
             }
 
             return pickupChangelog;
@@ -384,6 +389,24 @@ namespace ChangelogViewer.Windows.Fragments
 
             return false;
         }
+    }
 
+    public class ChangelogListCompare : IEqualityComparer<ChangeRecord>
+    {
+        public bool Equals(ChangeRecord x, ChangeRecord y)
+        {
+            if (x.tested == y.tested
+                && x.change.Equals(y.change, StringComparison.OrdinalIgnoreCase))
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        public int GetHashCode(ChangeRecord obj)
+        {
+            return obj.change.GetHashCode();
+        }
     }
 }

@@ -4,7 +4,12 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+             xmlns:namespc="clr-namespace:ChangelogViewer.Windows.Fragments"
              mc:Ignorable="d" Width="640" Height="480" Loaded="UserControl_Loaded">
+    <UserControl.Resources>
+        <namespc:ListViewItemStyleSelector x:Key="mySelector"/>
+    </UserControl.Resources>
+    
     <StackPanel Width="Auto" Height="Auto" Orientation="Horizontal">
         <ScrollViewer VerticalScrollBarVisibility="Auto" Height="450" VerticalAlignment="Top">
             <StackPanel Width="440">
@@ -12,7 +17,8 @@
                           Name="FixListHeader"
                           IsExpanded="True" Margin="10, 10, 10, 0"
                           Width="Auto" BorderThickness="0" Background="#CC60A917">
-                    <ListView Name="FixList" SelectionMode="Multiple" Width="420" BorderThickness="0" >
+                    <ListView Name="FixList" SelectionMode="Multiple" Width="420" 
+                              ItemContainerStyleSelector="{DynamicResource mySelector}" BorderThickness="0" >
                         <ListView.View>
                             <GridView>
                                 <GridViewColumn Width="50" Header="{StaticResource tested}">
@@ -40,7 +46,8 @@
                           Name="AddListHeader"
                           IsExpanded="True" Margin="10, 10, 10, 0"
                           Width="Auto" BorderThickness="0" Background="#CC60A917">
-                    <ListView Name="AddList" SelectionMode="Multiple" Width="420" BorderThickness="0" >
+                    <ListView Name="AddList" SelectionMode="Multiple" Width="420" 
+                              ItemContainerStyleSelector="{DynamicResource mySelector}" BorderThickness="0" >
                         <ListView.View>
                             <GridView>
                                 <GridViewColumn Width="50" Header="{StaticResource tested}">
@@ -68,7 +75,8 @@
                           Name="OptListHeader"
                           IsExpanded="True" Margin="10, 10, 10, 0"
                           Width="Auto" BorderThickness="0" Background="#CC60A917">
-                    <ListView Name="OptList" SelectionMode="Multiple" Width="420" BorderThickness="0" >
+                    <ListView Name="OptList" SelectionMode="Multiple" Width="420" 
+                              ItemContainerStyleSelector="{DynamicResource mySelector}" BorderThickness="0" >
                         <ListView.View>
                             <GridView>
                                 <GridViewColumn Width="50" Header="{StaticResource tested}">
@@ -96,7 +104,8 @@
                           Name="OemListHeader"
                           IsExpanded="True" Margin="10, 10, 10, 0"
                           Width="Auto" BorderThickness="0" Background="#CC60A917">
-                    <ListView Name="OemList" SelectionMode="Multiple" Width="420" BorderThickness="0" >
+                    <ListView Name="OemList" SelectionMode="Multiple" Width="420" 
+                              ItemContainerStyleSelector="{DynamicResource mySelector}" BorderThickness="0" >
                         <ListView.View>
                             <GridView>
                                 <GridViewColumn Width="50" Header="{StaticResource tested}">
@@ -124,7 +133,8 @@
                           Name="OthListHeader"
                           IsExpanded="True" Margin="10, 10, 10, 0"
                           Width="Auto" BorderThickness="0" Background="#CC60A917">
-                    <ListView Name="OthList" SelectionMode="Multiple" Width="420" BorderThickness="0" >
+                    <ListView Name="OthList" SelectionMode="Multiple" Width="420" 
+                              ItemContainerStyleSelector="{DynamicResource mySelector}" BorderThickness="0" >
                         <ListView.View>
                             <GridView>
                                 <GridViewColumn Width="50" Header="{StaticResource tested}">

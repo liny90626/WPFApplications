@@ -13,6 +13,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 using ChangelogViewer.Definitions;
+using System.Windows.Media.Animation;
 
 namespace ChangelogViewer.Windows.Fragments
 {
@@ -82,6 +83,44 @@ namespace ChangelogViewer.Windows.Fragments
         private void BtnSave_Click(object sender, RoutedEventArgs e)
         {
             mWin.SaveAndReload(mChangelog);
+        }
+    }
+
+    public class ListViewItemStyleSelector : StyleSelector
+    {
+
+        private Dictionary<ListViewItem, List<Storyboard>> storyboards = new Dictionary<ListViewItem, List<Storyboard>>();
+
+        /// <summary>
+        /// 下面的示例演示如何定义一个为行定义 Style 的 StyleSelector。
+        /// 此示例依据行索引定义 Background 颜色，为每行定义ListViewItem的动画板（Storyboard）。
+        ///ListView控件在初始化的时候，每初始化一行ListViewItem的时候都会进入该函数
+        /// </summary>
+        /// <param name="item"></param>
+        /// <param name="container"></param>
+        /// <returns></returns>
+        public override Style SelectStyle(object item, DependencyObject container)
+        {
+            Style st = new Style();
+            st.TargetType = typeof(ListViewItem);
+            Setter backGroundSetter = new Setter();
+            backGroundSetter.Property = ListViewItem.BackgroundProperty;
+            ListView listview =
+                ItemsControl.ItemsControlFromItemContainer(container)
+                as ListView;//获得当前ListView
+            int index =
+                listview.ItemContainerGenerator.IndexFromContainer(container);//行索引
+            if (index % 2 == 0)
+            {
+                backGroundSetter.Value = Brushes.LightGray;
+            }
+            else
+            {
+                backGroundSetter.Value = Brushes.Transparent;
+            }
+            st.Setters.Add(backGroundSetter);
+
+            return st;
         }
     }
 }
