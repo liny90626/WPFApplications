@@ -1,0 +1,86 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+    <!-- A -->
+    <sys:String x:Key="add">新增</sys:String>
+    <sys:String x:Key="app_name">Changelog查看器</sys:String>
+
+    <!-- B -->
+    <sys:String x:Key="back">返回</sys:String>
+    <sys:String x:Key="bad_parameters">所需参数存在空值!</sys:String>
+    
+    <!-- C -->
+    <sys:String x:Key="changelog">修改记录</sys:String>
+    <sys:String x:Key="confirm">确定</sys:String>
+    
+    <!-- E -->
+    <sys:String x:Key="excel_col_new_version">新版本号</sys:String>
+    <sys:String x:Key="excel_col_old_version">旧版本号</sys:String>
+    <sys:String x:Key="excel_col_device">兼容平台</sys:String>
+    <sys:String x:Key="excel_col_oem">客户OEM</sys:String>
+    <sys:String x:Key="excel_col_change">对比旧版本的更改</sys:String>
+    <sys:String x:Key="excel_col_svn">svn记录</sys:String>
+    <sys:String x:Key="excel_col_git">git记录</sys:String>
+    <sys:String x:Key="excel_col_date">发布时间</sys:String>
+    <sys:String x:Key="excel_col_desc">备注</sys:String>
+    
+    <!-- F -->
+    <sys:String x:Key="filter_changelog_file">日志文件|*.xls;*.xlsx</sys:String>
+    <sys:String x:Key="firmware_version">固件版本号</sys:String>
+    <sys:String x:Key="fix">修复</sys:String>
+
+    <!-- G -->
+    <sys:String x:Key="git_branch_name">GIT分支名称</sys:String>
+    <sys:String x:Key="git_revision">GIT版本号</sys:String>
+    
+    <!-- I -->
+    <sys:String x:Key="input_end_version">请选择终止版本号</sys:String>
+    <sys:String x:Key="input_oem_name">请选择需要查看的oem名称</sys:String>
+    <sys:String x:Key="input_start_version">请选择起始版本号</sys:String>
+    
+    <!-- L -->
+    <sys:String x:Key="load_failed">加载失败</sys:String>
+    <sys:String x:Key="load_file_failed">加载文件失败</sys:String>
+    <sys:String x:Key="loading">加载中...</sys:String>
+    <sys:String x:Key="loading_file">加载文件中...</sys:String>
+
+    <!-- O -->
+    <sys:String x:Key="oem">定制</sys:String>
+    <sys:String x:Key="oem_name">OEM名称</sys:String>
+    <sys:String x:Key="ok">好的</sys:String>
+    <sys:String x:Key="open">打开</sys:String>
+    <sys:String x:Key="optimize">优化</sys:String>
+    <sys:String x:Key="other">其他</sys:String>
+    
+    <!-- P -->
+    <sys:String x:Key="parse_changelog_failed">解析日志失败</sys:String>
+    <sys:String x:Key="parse_changelog_same_version">开始版本和结束版本相同, 没有可以查看的日志</sys:String>
+    <sys:String x:Key="parse_file_failed">解析文件失败</sys:String>
+    <sys:String x:Key="parse_file_data_failed">解析文件数据失败</sys:String>
+    <sys:String x:Key="parse_file_record_failed">解析文件记录失败</sys:String>
+    <sys:String x:Key="parsing_changelog">解析日志中...</sys:String>
+    <sys:String x:Key="parsing_file">解析文件中...</sys:String>
+    <sys:String x:Key="parsing_file_data">解析文件数据中...</sys:String>
+    <sys:String x:Key="parsing_file_record">解析文件记录中...</sys:String>
+    <sys:String x:Key="please_the_changelog_file">请选择需要查看的日志文件</sys:String>
+
+    <!-- S -->
+    <sys:String x:Key="save">保存</sys:String>
+    <sys:String x:Key="save_file_failed">保存文件失败</sys:String>
+    <sys:String x:Key="save_file_record">保存文件记录失败</sys:String>
+    <sys:String x:Key="saving_file">保存文件中...</sys:String>
+    <sys:String x:Key="saving_file_record">保存文件记录中...</sys:String>
+    <sys:String x:Key="svn_branch_name">SVN分支名称</sys:String>
+    <sys:String x:Key="svn_revision">SVN版本号</sys:String>
+
+    <!-- T -->
+    <sys:String x:Key="tested">已测</sys:String>
+    <sys:String x:Key="tips">提示</sys:String>
+    <sys:String x:Key="tips_end_version">eg: 1.108</sys:String>
+    <sys:String x:Key="tips_oem_name">eg: akuvox</sys:String>
+    <sys:String x:Key="tips_start_version">eg: 1.100</sys:String>
+
+    <!-- V -->
+    <sys:String x:Key="version">版本号</sys:String>
+
+</ResourceDictionary>

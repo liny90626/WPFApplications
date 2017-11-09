@@ -1,0 +1,9 @@
+﻿<Controls:MetroWindow x:Class="ChangelogViewer.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        Title="{StaticResource app_name}" Width="640" Height="480" TitleCharacterCasing="Normal" ResizeMode="NoResize" Loaded="MetroWindow_Loaded">
+    <StackPanel Width="Auto" Height="Auto">
+        <ContentControl Name="MainContent" />
+    </StackPanel>
+</Controls:MetroWindow>
