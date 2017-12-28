@@ -441,9 +441,17 @@ namespace PDMTools.controls
 
             string dstFolder = Environment.CurrentDirectory 
                 + System.IO.Path.DirectorySeparatorChar + "outputs";
+            mLogM.print("we output folder is " + dstFolder);
 
-            // 备份上一次输出目录, 并确保输出目录存在
-            mFileC.backupLastOutputs(dstFolder);
+            try
+            {
+                // 备份上一次输出目录, 并确保输出目录存在
+                mFileC.backupLastOutputs(dstFolder);
+            }
+            catch (System.Exception ex)
+            {
+                mLogM.print("backupLastOutputs catch an error, exception: " + ex.ToString());
+            }
 
             bool hasError = false;
             foreach (Operate inputOp in inputsList)
