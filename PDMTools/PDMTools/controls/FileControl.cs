@@ -37,7 +37,7 @@ namespace PDMTools.controls
             }
 
             // 获取机型
-            Regex rgxDevice = new Regex(@"([a-zA-Z]{1,3}[\d]{1,3}[a-zA-Z]{1,3})-");
+            Regex rgxDevice = new Regex(@"([a-zA-Z]{1,3}[\d]{1,3}[a-zA-Z]{0,3})-");
             string device = rgxDevice.Match(filename).ToString();
             if (!string.IsNullOrWhiteSpace(device))
             {
