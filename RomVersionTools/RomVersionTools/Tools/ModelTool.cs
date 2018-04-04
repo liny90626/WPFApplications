@@ -9,6 +9,10 @@ namespace RomVersionTools.Tools
     {
         private const string MODEL_NAME_UNKNOWN = "Unknown";
 
+        private const string MODEL_NAME_C315 = "C315";
+        private const string MODEL_NAME_C317 = "C317";
+        private const string MODEL_NAME_C31X = "C31X";
+
         private const string MODEL_NAME_IT80 = "IT80";
         private const string MODEL_NAME_IT82 = "IT82";
         private const string MODEL_NAME_IT83 = "IT83";
@@ -18,6 +22,9 @@ namespace RomVersionTools.Tools
         private const string MODEL_NAME_R48 = "R48";
         private const string MODEL_NAME_R49 = "R49";
         private const string MODEL_NAME_R4X = "R4X";
+
+        private const string MODEL_NAME_R73 = "R73";
+        private const string MODEL_NAME_R7X = "R7X";
 
         public List<VersionNodeItem> GetModelXLevel(MainWindow win, List<VersionNodeItem> list, VersionNodeItem node)
         {
@@ -42,9 +49,17 @@ namespace RomVersionTools.Tools
             {
                 newNode.modName = MODEL_NAME_IT8X;
             }
+            else if (IsC31XModel(node.modName))
+            {
+                newNode.modName = MODEL_NAME_C31X;
+            }
             else if (IsR4XModel(node.modName))
             {
                 newNode.modName = MODEL_NAME_R4X;
+            }
+            else if (IsR7XModel(node.modName))
+            {
+                newNode.modName = MODEL_NAME_R7X;
             }
             else
             {
@@ -103,8 +118,20 @@ namespace RomVersionTools.Tools
                 return true;
             }
 
+            if (IsC31XModel(modName1)
+                && IsC31XModel(modName2))
+            {
+                return true;
+            }
+
             if (IsR4XModel(modName1)
                 && IsR4XModel(modName2))
+            {
+                return true;
+            }
+
+            if (IsR7XModel(modName1)
+                && IsR7XModel(modName2))
             {
                 return true;
             }
@@ -147,6 +174,23 @@ namespace RomVersionTools.Tools
             return false;
         }
 
+        private bool IsC31XModel(string modName)
+        {
+            if (string.IsNullOrWhiteSpace(modName))
+            {
+                return false;
+            }
+
+            if (0 == string.Compare(MODEL_NAME_C315, modName, true)
+                || 0 == string.Compare(MODEL_NAME_C317, modName, true)
+                || 0 == string.Compare(MODEL_NAME_C31X, modName, true))
+            {
+                return true;
+            }
+
+            return false;
+        }
+
         private bool IsR4XModel(string modName)
         {
             if (string.IsNullOrWhiteSpace(modName))
@@ -158,6 +202,22 @@ namespace RomVersionTools.Tools
                 || 0 == string.Compare(MODEL_NAME_R48, modName, true)
                 || 0 == string.Compare(MODEL_NAME_R49, modName, true)
                 || 0 == string.Compare(MODEL_NAME_R4X, modName, true))
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        private bool IsR7XModel(string modName)
+        {
+            if (string.IsNullOrWhiteSpace(modName))
+            {
+                return false;
+            }
+
+            if (0 == string.Compare(MODEL_NAME_R73, modName, true)
+                || 0 == string.Compare(MODEL_NAME_R7X, modName, true))
             {
                 return true;
             }
